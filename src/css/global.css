@@ -1,0 +1,77 @@
+:root {
+  --accent_color: #1da0c3;
+  --sub_color: #aaddff;
+  --tertiary_color: #477987;
+}
+.hover-underline:hover {
+  color: var(--sub_color);
+  text-decoration: underline !important;
+}
+.hover-bounce {
+  transition: transform ease 0.3s;
+}
+.hover-bounce:hover {
+  transform: translateY(-6%);
+}
+
+.w-fit-content {
+  width: fit-content !important;
+}
+.h-fit-content {
+  height: fit-content !important;
+}
+.text-accent {
+  color: var(--accent_color) !important;
+}
+.text-sub {
+  color: var(--sub_color) !important;
+}
+.bg-accent {
+  background-color: var(--accent_color) !important;
+}
+.bg-sub {
+  background-color: var(--sub_color) !important;
+}
+.bg-tertiary {
+  background-color: var(--tertiary_color) !important;
+}
+.bg-wall {
+  background-color: #f5f5fa !important;
+}
+
+/*============================*/
+/*-----------UTILITY-----------*/
+/*============================*/
+#header {
+  max-height: 3.5rem;
+}
+
+.header-logo {
+  height: 2.5rem;
+}
+.header-logo img {
+  max-height: 100%;
+}
+.search input::placeholder,
+.search button {
+  color: rgba(22, 17, 19, 0.6);
+  font-size: 14px;
+}
+.search input:focus {
+  box-shadow: none;
+}
+
+.search button {
+  font-size: 1.2rem;
+}
+
+/*============================*/
+/*-----------HEADER-----------*/
+/*============================*/
+footer {
+  height: 42vh;
+}
+
+/*============================*/
+/*-----------FOOTER-----------*/
+/*============================*/
