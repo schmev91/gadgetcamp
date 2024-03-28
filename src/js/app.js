@@ -1,32 +1,33 @@
+import { HomeCtrl } from "./controller/home.ctrl.js";
+import { AccountCtrl } from "./controller/account.ctrl.js";
+import { CartCtrl } from "./controller/cart.ctrl.js";
+import { ProductsCtrl } from "./controller/products.ctrl.js";
+
 angular
   .module("App", ["ngRoute"])
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider) {
     $routeProvider
-      .when("/", {
+      .when("/home", {
         templateUrl: "./src/template/home.html",
         controller: "HomeController",
       })
-      .when("/product", {
-        templateUrl: "./src/template/home.html",
-        controller: "ProductController",
+      .when("/account", {
+        templateUrl: "./src/template/account.html",
+        controller: "AccountController",
       })
       .when("/cart", {
-        templateUrl: "cart.html",
+        templateUrl: "./src/template/cart.html",
         controller: "CartController",
       })
+      .when("/products/:category", {
+        templateUrl: "./src/template/search.html",
+        controller: "ProductsController",
+      })
       .otherwise({
-        // redirectTo: "/",
-        template: "<h1>404 not found</h1>",
+        redirectTo: "/home",
       });
-
-    // $locationProvider.html5Mode(true);
   })
-  .controller("HomeController", function () {
-    console.log("aa");
-  })
-  .controller("ProductController", function () {
-    // Controller logic for product page
-  })
-  .controller("CartController", function () {
-    // Controller logic for cart page
-  });
+  .controller("HomeController", HomeCtrl)
+  .controller("AccountController", AccountCtrl)
+  .controller("CartController", CartCtrl)
+  .controller("ProductsController", ProductsCtrl);

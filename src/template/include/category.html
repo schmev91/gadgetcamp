@@ -1,0 +1,27 @@
+<aside class="navbar navbar-expand-lg flex-column align-items-start col-lg-3 bg-white rounded-2 px-2 ">
+    <p class="text-dark-emphasis  text-decoration-none  h-fit-content fw-medium fs-5 ">Category</p>
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="category" aria-labelledby="categoryLabel">
+        <div class="offcanvas-header">
+            <p class="offcanvas-title fs-5" id="categoryLabel">Category</p>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav flex-column text-start" ng-if="categoryList">
+                <li class="nav-item" ng-repeat="category in categoryList">
+                    <a class="nav-link active" href="#!{{category}}">{{category.charAt(0).toUpperCase() +
+                        category.slice(1);}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>
+
+
+<!-- MOBILE CATEGORY -->
+<button
+    class="d-lg-none position-absolute start-0  btn rounded-end-5  py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 "
+    type="button" data-bs-toggle="offcanvas" data-bs-target="#category" aria-controls="category">
+    <i class="fs-5 fa-solid fa-layer-group"></i>
+    <span class="d-none d-md-block fw-medium ">category</span>
+    <i class="d-block d-md-none fa-solid fa-caret-right"></i>
+</button>

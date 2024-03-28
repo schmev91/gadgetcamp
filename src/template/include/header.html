@@ -5,7 +5,7 @@
         </div>
         <!-- top-bar-logo -->
         <div class="col d-sm-none">
-            <a href="#">
+            <a href="#!home">
                 <img class="img-fluid" style="height: 1rem;" src="./src/img/gadgetcamp-logo.png" alt="">
             </a>
         </div>
@@ -21,8 +21,8 @@
         <div class="row align-items-center justify-content-between">
             <!-- LOGO xs hidden-->
             <div class="header-logo d-none d-sm-block  col-4 col-lg-2 h-fit-content">
-                <a href="#">
-                    <img class="img-fluid" src="./src/img/gadgetcamp-logo.png" alt="">
+                <a href="#!home">
+                    <img class="img-fluid hover-bounce" src="./src/img/gadgetcamp-logo.png" alt="">
                 </a>
             </div>
             <!-- SEARCH -->
@@ -50,11 +50,11 @@
             <div
                 class="header-right col col-sm-auto gap-2 gap-md-3 d-flex justify-content-sm-end align-items-center h-fit-content">
                 <div class="d-flex flex-grow-1 gap-2 gap-md-4 align-items-center">
-                    <a class="text-accent fs-5 link-underline text-decoration-none" href=""><i
-                            class="fa-solid fa-shop"></i>
-                        Shop</a>
-                    <a href="" class="fs-5 link-secondary  text-decoration-none "><i
-                            class=" fa-regular fa-face-smile-wink"></i> Account</a>
+                    <a ng-class="page == 'home' ? 'text-accent' : 'text-secondary header-inactive'"
+                        class="fs-5 text-decoration-none" href="#!home"><i class="fa-solid fa-house"></i>
+                        Home</a>
+                    <a href="#!account" ng-class="page == 'account' ? 'text-accent' : 'text-secondary header-inactive'"
+                        class="fs-5 text-decoration-none "><i class=" fa-regular fa-face-smile-wink"></i> Account</a>
                 </div>
                 <span class="fw-medium  text-secondary opacity-50  h-fit-content">|</span>
                 <!-- SEARCH BUTTON FOR MOBILE -->
@@ -66,7 +66,8 @@
                 </div>
                 <!-- CART-BUTTON -->
                 <div class="header-cart">
-                    <a href="#"><i class="fs-3 text-accent fa-solid fa-cart-shopping"></i></a>
+                    <a href="#!cart"><i ng-class="page == 'cart' ? 'text-accent' : 'text-secondary header-inactive'"
+                            class="fs-3 fa-solid fa-cart-shopping"></i></a>
                 </div>
             </div>
 

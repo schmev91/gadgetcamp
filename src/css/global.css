@@ -7,11 +7,18 @@
   color: var(--sub_color);
   text-decoration: underline !important;
 }
-.hover-bounce {
+.hover-bounce,
+.header-inactive {
   transition: transform ease 0.3s;
 }
-.hover-bounce:hover {
+.hover-bounce:hover,
+.header-inactive:hover {
   transform: translateY(-6%);
+}
+
+.hover-accent:hover,
+.header-inactive:hover {
+  color: var(--accent_color) !important;
 }
 
 .w-fit-content {
@@ -68,9 +75,6 @@
 /*============================*/
 /*-----------HEADER-----------*/
 /*============================*/
-footer {
-  /* height: 42vh; */
-}
 
 /*============================*/
 /*-----------FOOTER-----------*/
