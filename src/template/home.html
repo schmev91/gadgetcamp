@@ -64,14 +64,26 @@
 
   <main class="col bg-white rounded-2">
     <section class="row row-cols-4 row-gap-4">
-      <div class="col">
+      <div class="col hover-bounce" ng-repeat="p in viewProducts">
         <a href="" class="card text-decoration-none">
-          <img src="{{p.thumbnail}}" class="card-img-top" alt="..." />
+          <img
+            src="{{p.thumbnail}}"
+            class="card-img-top object-fit-cover"
+            height="172"
+            alt="..."
+          />
           <div class="card-body">
-            <h4 class="text-secondary">{{p.title}}</h4>
+            <h5
+              class="text-secondary m-0 text-nowrap overflow-hidden"
+              style="text-overflow: ellipsis"
+            >
+              {{p.title}}
+            </h5>
             <span class="text-body-secondary small">{{p.brand}}</span>
 
-            <h3 class="text-dark-emphasis mt-3">{{p.price | currency}}</h3>
+            <p class="text-dark-emphasis mt-2 fw-medium m-0">
+              {{p.price | currency}}
+            </p>
           </div>
         </a>
       </div>

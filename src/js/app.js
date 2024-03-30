@@ -31,22 +31,3 @@ angular
   .controller("AccountController", AccountCtrl)
   .controller("CartController", CartCtrl)
   .controller("ProductsController", ProductsCtrl);
-
-angular.module("App").factory("ngCache", function ($cacheFactory) {
-  var myCache = $cacheFactory("myCache");
-
-  return {
-    putData: function (key, data) {
-      myCache.put(key, data);
-    },
-    getData: function (key) {
-      return myCache.get(key);
-    },
-    removeData: function (key) {
-      myCache.remove(key);
-    },
-    clearCache: function () {
-      myCache.removeAll();
-    },
-  };
-});
