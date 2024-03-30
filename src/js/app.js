@@ -11,6 +11,10 @@ angular
         templateUrl: "./src/template/home.html",
         controller: "HomeController",
       })
+      .when("/products/:category", {
+        templateUrl: "./src/template/search.html",
+        controller: "HomeController",
+      })
       .when("/account", {
         templateUrl: "./src/template/account.html",
         controller: "AccountController",
@@ -18,10 +22,6 @@ angular
       .when("/cart", {
         templateUrl: "./src/template/cart.html",
         controller: "CartController",
-      })
-      .when("/products/:category", {
-        templateUrl: "./src/template/search.html",
-        controller: "ProductsController",
       })
       .otherwise({
         redirectTo: "/home",
@@ -31,3 +31,22 @@ angular
   .controller("AccountController", AccountCtrl)
   .controller("CartController", CartCtrl)
   .controller("ProductsController", ProductsCtrl);
+
+angular.module("App").factory("ngCache", function ($cacheFactory) {
+  var myCache = $cacheFactory("myCache");
+
+  return {
+    putData: function (key, data) {
+      myCache.put(key, data);
+    },
+    getData: function (key) {
+      return myCache.get(key);
+    },
+    removeData: function (key) {
+      myCache.remove(key);
+    },
+    clearCache: function () {
+      myCache.removeAll();
+    },
+  };
+});

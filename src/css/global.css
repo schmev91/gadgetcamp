@@ -21,6 +21,13 @@
   color: var(--accent_color) !important;
 }
 
+.hover-category:hover {
+  transition: all ease-out 0.2s;
+  transform: translateX(-0.6rem);
+  font-weight: medium;
+  scale: 1.05;
+}
+
 .w-fit-content {
   width: fit-content !important;
 }

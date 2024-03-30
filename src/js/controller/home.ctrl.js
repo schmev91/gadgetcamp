@@ -1,6 +1,13 @@
 export function HomeCtrl($scope, $rootScope, $http) {
   $rootScope.page = "home";
-  $http.get("https://dummyjson.com/products/categories").then((res) => {
-    $scope.categoryList = res.data;
+
+  if (!$rootScope.categoryList) {
+    $http.get("https://dummyjson.com/products/categories").then((res) => {
+      $rootScope.categoryList = res.data;
+    });
+  }
+
+  $http.get("https://dummyjson.com/products/2").then((res) => {
+    $scope.p = res.data;
   });
 }

@@ -1,33 +1,80 @@
 <div class="row gap-3">
-    <aside class="navbar navbar-expand-lg flex-column align-items-start col-lg-3 bg-white rounded-2 px-2 ">
-        <p class="text-dark-emphasis  text-decoration-none  h-fit-content fw-medium fs-5 ">Category</p>
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="category" aria-labelledby="categoryLabel">
-            <div class="offcanvas-header">
-                <p class="offcanvas-title fs-5" id="categoryLabel">Category</p>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
-                <ul class="navbar-nav flex-column text-start" ng-if="categoryList">
-                    <li class="nav-item" ng-repeat="category in categoryList">
-                        <a class="nav-link active" href="#!products/{{category}}">{{category.charAt(0).toUpperCase() +
-                            category.slice(1);}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </aside>
+  <aside
+    class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2"
+  >
+    <p
+      class="d-none d-lg-block text-dark-emphasis text-decoration-none h-fit-content fw-medium fs-5 px-2"
+    >
+      Category
+    </p>
+    <div
+      class="offcanvas offcanvas-start d-lg-block"
+      tabindex="-1"
+      id="category"
+      aria-labelledby="categoryLabel"
+    >
+      <div class="offcanvas-header">
+        <p class="offcanvas-title fs-5" id="categoryLabel">Category</p>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul
+          class="navbar-nav flex-column gap-2 text-start"
+          ng-if="categoryList"
+        >
+          <li
+            ng-repeat="category in categoryList"
+            class="nav-item link-opacity-75-hover hover-category px-3"
+          >
+            <a class="nav-link w-100" href="#!products/{{category}}"
+              ><span>
+                <img
+                  src="./src/img/category/{{category}}.jpg"
+                  class="rounded-3"
+                  style="width: 3rem; height: 3rem; object-fit: cover"
+                  alt=""
+                />
+              </span>
+              {{(category.charAt(0).toUpperCase() +
+              category.slice(1)).replace('-'," ")}}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
 
+  <!-- MOBILE CATEGORY -->
+  <button
+    class="d-lg-none position-absolute start-0 btn rounded-end-5 py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 w-fit-content"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#category"
+    aria-controls="category"
+  >
+    <i class="fs-5 fa-solid fa-layer-group"></i>
+    <span class="d-none d-md-block fw-medium">category</span>
+    <i class="d-block d-md-none fa-solid fa-caret-right"></i>
+  </button>
 
-    <!-- MOBILE CATEGORY -->
-    <button
-        class="d-lg-none position-absolute start-0  btn rounded-end-5  py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 "
-        type="button" data-bs-toggle="offcanvas" data-bs-target="#category" aria-controls="category">
-        <i class="fs-5 fa-solid fa-layer-group"></i>
-        <span class="d-none d-md-block fw-medium ">category</span>
-        <i class="d-block d-md-none fa-solid fa-caret-right"></i>
-    </button>
+  <main class="col bg-white rounded-2">
+    <section class="row row-cols-4 row-gap-4">
+      <div class="col">
+        <a href="" class="card text-decoration-none">
+          <img src="{{p.thumbnail}}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h4 class="text-secondary">{{p.title}}</h4>
+            <span class="text-body-secondary small">{{p.brand}}</span>
 
-    <main class="col bg-white rounded-2 ">
-        main
-    </main>
+            <h3 class="text-dark-emphasis mt-3">{{p.price | currency}}</h3>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
 </div>
