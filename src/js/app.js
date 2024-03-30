@@ -2,6 +2,7 @@ import { HomeCtrl } from "./controller/home.ctrl.js";
 import { AccountCtrl } from "./controller/account.ctrl.js";
 import { CartCtrl } from "./controller/cart.ctrl.js";
 import { ProductsCtrl } from "./controller/products.ctrl.js";
+import { ShopCtrl } from "./controller/shop.ctrl.js";
 
 angular
   .module("App", ["ngRoute"])
@@ -10,6 +11,10 @@ angular
       .when("/home", {
         templateUrl: "./src/template/home.html",
         controller: "HomeController",
+      })
+      .when("/shop", {
+        templateUrl: "./src/template/shop.html",
+        controller: "ShopController",
       })
       .when("/products/:category", {
         templateUrl: "./src/template/search.html",
@@ -28,6 +33,7 @@ angular
       });
   })
   .controller("HomeController", HomeCtrl)
+  .controller("ShopController", ShopCtrl)
   .controller("AccountController", AccountCtrl)
   .controller("CartController", CartCtrl)
   .controller("ProductsController", ProductsCtrl);

@@ -10,7 +10,9 @@ export function HomeCtrl($scope, $rootScope, $http) {
   if (!$rootScope.products) {
     $http.get("https://dummyjson.com/products?limit=100").then((res) => {
       $rootScope.products = res.data.products;
-      $scope.viewProducts = $rootScope.products.splice(0, 12);
+      $scope.viewProducts = $rootScope.products.slice(0, 12);
     });
+  } else {
+    $scope.viewProducts = $rootScope.products.slice(0, 12);
   }
 }
