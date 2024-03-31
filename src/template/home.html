@@ -64,12 +64,36 @@
 
   <main class="col">
     <!-- BANNER -->
-    <section id="banner" class="bg-white rounded-2 p-2 p-lg-3">
-      <div
-        id="carouselExampleAutoplaying"
-        class="carousel slide"
-        data-bs-ride="carousel"
-      >
+    <section id="banner-container" class="bg-white rounded-2 p-2 p-lg-3">
+      <div id="banner" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#banner"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#banner"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#banner"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#banner"
+            data-bs-slide-to="3"
+            aria-label="Slide 4"
+          ></button>
+        </div>
         <div class="carousel-inner">
           <div
             class="carousel-item"
@@ -87,7 +111,7 @@
         <button
           class="carousel-control-prev"
           type="button"
-          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-target="#banner"
           data-bs-slide="prev"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
