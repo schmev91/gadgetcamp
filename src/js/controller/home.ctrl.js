@@ -31,11 +31,6 @@ export function HomeCtrl($scope, $rootScope, $http) {
     $http.get("https://dummyjson.com/products?limit=100").then((res) => {
       $rootScope.products = res.data.products;
       $scope.viewProducts = $rootScope.products.slice(0, 12);
-      // console.log(
-      //   $rootScope.products.filter(({ category }) => {
-      //     if (category == "automotive") return true;
-      //   })
-      // );
     });
   } else {
     $scope.viewProducts = $rootScope.products.slice(0, 12);
