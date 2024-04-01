@@ -1,0 +1,19 @@
+[
+    {
+        "link": "",
+        "active": true,
+        "image": "./src/img/banner/iphonexs-banner.jpg"
+    },
+    {
+        "link": "",
+        "image": "./src/img/banner/macbookpro-banner.jpg"
+    },
+    {
+        "link": "",
+        "image": "./src/img/banner/furniture-banner.jpg"
+    },
+    {
+        "link": "",
+        "image": "./src/img/banner/womens_fashion-banner.jpg"
+    }
+]
