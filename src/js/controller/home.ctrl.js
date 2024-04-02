@@ -34,6 +34,15 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
     for (let i = 0; i < 2; i++) {
       $scope.saleProducts.push(probSortByDiscount.slice(i * 6, (i + 1) * 6));
     }
+
+    //load best rated products
+    $scope.bestRatedProducts = [];
+    const prodSortByRating = $rootScope.products.sort(
+      (p1, p2) => p2.rating - p1.rating
+    );
+    for (let i = 0; i < 3; i++) {
+      $scope.bestRatedProducts.push(prodSortByRating.slice(i * 5, (i + 1) * 5));
+    }
   };
   homeHandler();
 

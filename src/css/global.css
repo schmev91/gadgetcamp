@@ -2,6 +2,7 @@
   --accent_color: #1da0c3;
   --sub_color: #aaddff;
   --tertiary_color: #477987;
+  --star-color: #ffc70d;
 }
 .hover-underline:hover {
   color: var(--sub_color);
@@ -51,6 +52,13 @@
 }
 .bg-wall {
   background-color: #f5f5fa !important;
+}
+
+.text-yellow {
+  color: var(--star-color) !important;
+}
+.bg-yellow {
+  background-color: var(--star-color) !important;
 }
 
 /*============================*/
