@@ -51,7 +51,8 @@
 
   <!-- MOBILE CATEGORY -->
   <button
-    class="d-lg-none position-absolute start-0 btn rounded-end-5 py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 w-fit-content"
+    class="d-lg-none position-fixed start-0 btn rounded-end-5 py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 w-fit-content"
+    style="z-index: 10"
     type="button"
     data-bs-toggle="offcanvas"
     data-bs-target="#category"
@@ -131,11 +132,11 @@
 
     <!-- SALE  -->
     <section id="sale-container" class="bg-white rounded-2 p-2 p-lg-3 mt-3">
-      <div>
+      <div class="d-flex align-items-center gap-2">
         <span class="fw-medium fs-5 text-secondary-emphasis"
           >Best sale off today</span
         >
-        <strong class="text-secondary">
+        <strong class="text-secondary d-flex align-items-center gap-1">
           <span class="text-bg-danger text-white px-1 rounded-2"
             >{{ countdown.hours }}</span
           >
@@ -151,8 +152,48 @@
       </div>
       <div id="sale" class="carousel slide">
         <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="..." class="d-block w-100" alt="..." />
+          <div
+            class="carousel-item"
+            ng-class="{'active': $index == 0}"
+            ng-repeat="product_chunk in saleProducts"
+          >
+            <div
+              class="row row-cols-2 row-cols-md-3 row-cols-xl-6 gx-2 gx-md-3"
+            >
+              <div class="col" ng-repeat="p in product_chunk">
+                <div
+                  class="card border-0 position-relative"
+                  style="min-height: 100%"
+                >
+                  <span
+                    class="sale-discount position-absolute text-danger fw-medium rounded-1"
+                    style="
+                      font-size: 0.85rem;
+                      background-color: #ffdde0;
+                      transform: translate(0.5rem, 0.5rem);
+                    "
+                    >-{{p.discountPercentage | number: 0}}%</span
+                  >
+                  <img
+                    src="{{p.thumbnail}}"
+                    class="card-img-top flex-grow-1 img-fluid object-fit-cover rounded-2"
+                    maintain-ratio
+                    width="100%"
+                    style="height: 160px"
+                    alt=""
+                  />
+                  <div class="card-body flex-grow-0">
+                    <div
+                      class="text-danger text-center fw-medium fs-5 text-nowrap overflow-hidden"
+                      style="text-overflow: ellipsis"
+                    >
+                      ${{(p.price * p.discountPercentage | number:
+                      1).replace(".0","")}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <button
@@ -160,6 +201,7 @@
           type="button"
           data-bs-target="#sale"
           data-bs-slide="prev"
+          style="left: -5% !important"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -169,6 +211,7 @@
           type="button"
           data-bs-target="#sale"
           data-bs-slide="next"
+          style="right: -5% !important"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>

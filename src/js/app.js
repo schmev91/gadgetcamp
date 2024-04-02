@@ -36,4 +36,24 @@ angular
   .controller("ShopController", ShopCtrl)
   .controller("AccountController", AccountCtrl)
   .controller("CartController", CartCtrl)
-  .controller("ProductsController", ProductsCtrl);
+  .controller("ProductsController", ProductsCtrl)
+  .directive("maintainRatio", function () {
+    return {
+      restrict: "A",
+      link: function (scope, element) {
+        const observer = new ResizeObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.target === element[0]) {
+              element.css("height", element[0].clientWidth + "px");
+            }
+          }
+        });
+        observer.observe(element[0]);
+
+        // Clean up the observer when the directive is destroyed
+        scope.$on("$destroy", function () {
+          observer.unobserve(element[0]);
+        });
+      },
+    };
+  });

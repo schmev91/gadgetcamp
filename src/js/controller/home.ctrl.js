@@ -13,17 +13,32 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
     });
   }
 
-  // GET ALL PRODUCT DATA
-  if (!$rootScope.products) {
-    $http.get("https://dummyjson.com/products?limit=100").then((res) => {
-      $rootScope.products = res.data.products;
+  const homeHandler = async function () {
+    // GET ALL PRODUCT DATA
+    if (!$rootScope.products) {
+      await $http
+        .get("https://dummyjson.com/products?limit=100")
+        .then((res) => {
+          $rootScope.products = res.data.products;
+          $scope.viewProducts = $rootScope.products.slice(0, 12);
+        });
+    } else {
       $scope.viewProducts = $rootScope.products.slice(0, 12);
-    });
-  } else {
-    $scope.viewProducts = $rootScope.products.slice(0, 12);
-  }
+    }
+
+    //load sale products
+    $scope.saleProducts = [];
+    const probSortByDiscount = $rootScope.products.sort(
+      (p1, p2) => p2.discountPercentage - p1.discountPercentage
+    );
+    for (let i = 0; i < 2; i++) {
+      $scope.saleProducts.push(probSortByDiscount.slice(i * 6, (i + 1) * 6));
+    }
+  };
+  homeHandler();
 
   // SALE-SECTION
+  // sale countdown
   var now = new Date(),
     endOfDay = new Date(now);
 
