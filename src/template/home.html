@@ -351,62 +351,27 @@
             <li
               class="nav-item"
               role="presentation"
-              ng-repeat="tabData in dailySug_data"
+              ng-repeat="tab in dailySug_data"
             >
               <button
                 class="btn tab-btn hover-bg-gray border-white rounded-bottom-0 d-flex flex-column align-items-center gap-1 px-5 py-3 h-100"
                 ng-class="{'active': $index == 0}"
-                id="{{tabData.name}}-btn"
+                id="{{tab.name}}-btn"
                 data-bs-toggle="tab"
-                data-bs-target="#{{tabData.name}}"
+                data-bs-target="#{{tab.name}}"
                 type="button"
                 role="tab"
-                aria-controls="{{tabData.name}}"
+                aria-controls="{{tab.name}}"
                 aria-selected="{{$index == 0 ? 'true' : 'false'}}"
                 style="width: 12rem"
               >
                 <i
-                  class="fa-solid {{tabData.icon.class}} fs-4"
-                  ng-style="{'color': tabData.icon.color}"
+                  class="fa-solid {{tab.icon.class}} fs-4"
+                  ng-style="{'color': tab.icon.color}"
                 ></i>
-                <small class="text-secondary">{{tabData.text}}</small>
+                <small class="text-secondary">{{tab.text}}</small>
               </button>
             </li>
-            <!-- <li class="nav-item" role="presentation">
-              <button
-                class="btn tab-btn hover-bg-gray border-white rounded-bottom-0 d-flex flex-column align-items-center gap-1 px-5 py-3"
-                id="tech-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#tab-tech"
-                type="button"
-                role="tab"
-                aria-controls="tab-tech"
-                aria-selected="false"
-                style="width: 12rem"
-              >
-                <i
-                  class="fa-solid fa-microchip fs-4"
-                  style="color: #5200ff"
-                ></i>
-                <small class="text-secondary">Tech</small>
-              </button>
-            </li>
-            <li class="nav-item" role="presentation">
-              <button
-                class="btn tab-btn hover-bg-gray border-white rounded-bottom-0 d-flex flex-column align-items-center gap-1 px-5 py-3"
-                id="tab-new_arrivals"
-                data-bs-toggle="tab"
-                data-bs-target="#tab-new_arrivals"
-                type="button"
-                role="tab"
-                aria-controls="newly_arrivals-tab"
-                aria-selected="false"
-                style="width: 12rem"
-              >
-                <i class="fa-solid fa-bell fs-4" style="color: #ffd43b"></i>
-                <small class="text-secondary">New arrivals</small>
-              </button>
-            </li> -->
           </ul>
         </div>
 

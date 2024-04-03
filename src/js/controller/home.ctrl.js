@@ -44,6 +44,8 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
       $scope.bestRatedProducts.push(prodSortByRating.slice(i * 5, (i + 1) * 5));
     }
 
+    //load daily suggestion
+
     $scope.dailySug_data = [
       {
         name: "tab-foryou",
@@ -52,6 +54,8 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
           class: "fa-heart",
           color: "#ff8787",
         },
+        banner: "./src/img/banner/foryou-banner.jpg",
+        products: shuffleArray($rootScope.products, 22),
       },
       {
         name: "tab-tech",
@@ -60,6 +64,10 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
           class: "fa-microchip",
           color: "#5200ff",
         },
+        banner: "./src/img/banner/tech-banner.jpg",
+        products: $rootScope.products.filter(({ category }) =>
+          ["smartphones", "laptops", "automotive"].includes(category)
+        ),
       },
       {
         name: "tab-new_arrivals",
@@ -68,8 +76,14 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
           class: "fa-bell",
           color: "#ffd43b",
         },
+        banner: "./src/img/banner/new_arrivals-banner.jpg",
+        products: $rootScope.products
+          .sort((p1, p2) => p2.id - p1.id)
+          .slice(0, 22),
       },
     ];
+    console.log($scope.dailySug_data);
+    console.log($scope.products.length);
   };
   homeHandler();
 
@@ -108,4 +122,13 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
   $scope.$on("$destroy", function () {
     $interval.cancel(intervalPromise);
   });
+}
+
+function shuffleArray(array, length) {
+  const shuffledArray = array.slice(); // Create a shallow copy of the original array
+  for (let i = shuffledArray.length - 1; i > length - 1; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray.slice(0, length); // Return a new array with specified length
 }
