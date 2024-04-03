@@ -43,6 +43,33 @@ export function HomeCtrl($scope, $rootScope, $http, $interval) {
     for (let i = 0; i < 3; i++) {
       $scope.bestRatedProducts.push(prodSortByRating.slice(i * 5, (i + 1) * 5));
     }
+
+    $scope.dailySug_data = [
+      {
+        name: "tab-foryou",
+        text: "For you",
+        icon: {
+          class: "fa-heart",
+          color: "#ff8787",
+        },
+      },
+      {
+        name: "tab-tech",
+        text: "Tech",
+        icon: {
+          class: "fa-microchip",
+          color: "#5200ff",
+        },
+      },
+      {
+        name: "tab-new_arrivals",
+        text: "New Arrivals",
+        icon: {
+          class: "fa-bell",
+          color: "#ffd43b",
+        },
+      },
+    ];
   };
   homeHandler();
 

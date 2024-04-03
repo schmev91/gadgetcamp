@@ -344,27 +344,35 @@
         >
           <div class="d-flex align-items-center gap-2 mb-1">
             <span class="fw-medium fs-5 text-secondary-emphasis"
-              >Recommend</span
+              >Daily suggestion</span
             >
           </div>
           <ul class="nav nav-pills" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
+            <li
+              class="nav-item"
+              role="presentation"
+              ng-repeat="tabData in dailySug_data"
+            >
               <button
                 class="btn tab-btn hover-bg-gray border-white rounded-bottom-0 d-flex flex-column align-items-center gap-1 px-5 py-3 h-100"
-                id="foryou-tab"
+                ng-class="{'active': $index == 0}"
+                id="{{tabData.name}}-btn"
                 data-bs-toggle="tab"
-                data-bs-target="#tab-foryou"
+                data-bs-target="#{{tabData.name}}"
                 type="button"
                 role="tab"
-                aria-controls="tab-foryou"
-                aria-selected="true"
+                aria-controls="{{tabData.name}}"
+                aria-selected="{{$index == 0 ? 'true' : 'false'}}"
                 style="width: 12rem"
               >
-                <i class="fa-solid fa-heart fs-5" style="color: #ff8787"></i>
-                <small class="text-secondary">For you</small>
+                <i
+                  class="fa-solid {{tabData.icon.class}} fs-4"
+                  ng-style="{'color': tabData.icon.color}"
+                ></i>
+                <small class="text-secondary">{{tabData.text}}</small>
               </button>
             </li>
-            <li class="nav-item" role="presentation">
+            <!-- <li class="nav-item" role="presentation">
               <button
                 class="btn tab-btn hover-bg-gray border-white rounded-bottom-0 d-flex flex-column align-items-center gap-1 px-5 py-3"
                 id="tech-tab"
@@ -386,7 +394,7 @@
             <li class="nav-item" role="presentation">
               <button
                 class="btn tab-btn hover-bg-gray border-white rounded-bottom-0 d-flex flex-column align-items-center gap-1 px-5 py-3"
-                id="newly_arrivals-tab"
+                id="tab-new_arrivals"
                 data-bs-toggle="tab"
                 data-bs-target="#tab-new_arrivals"
                 type="button"
@@ -398,7 +406,7 @@
                 <i class="fa-solid fa-bell fs-4" style="color: #ffd43b"></i>
                 <small class="text-secondary">New arrivals</small>
               </button>
-            </li>
+            </li> -->
           </ul>
         </div>
 
