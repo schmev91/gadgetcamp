@@ -1,6 +1,7 @@
 :root {
   --accent_color: #1da0c3;
   --sub_color: #aaddff;
+  --sub_color-rgb: 170, 221, 255;
   --tertiary_color: #477987;
   --star-color: #ffc70d;
 }
@@ -17,6 +18,10 @@
   transform: translateY(-6%);
 }
 
+.hover-bg-gray:hover {
+  background-color: rgba(185, 185, 185, 0.1) !important;
+}
+
 .hover-accent:hover,
 .header-inactive:hover {
   color: var(--accent_color) !important;
@@ -27,6 +32,11 @@
   transform: translateX(-0.6rem);
   font-weight: medium;
   /* scale: 1.05; */
+}
+
+.tab-btn.active {
+  background-color: rgba(var(--sub_color-rgb), 0.2) !important;
+  border-bottom: 2px solid var(--accent_color) !important;
 }
 
 .w-fit-content {
