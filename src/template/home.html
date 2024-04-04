@@ -1,7 +1,7 @@
 <div class="row gap-3">
   <aside
     class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2 position-sticky overflow-y-scroll"
-    style="max-height: 100vh; scrollbar-width: none; top: 1rem"
+    style="max-height: 100vh; scrollbar-width: none; top: 1rem; z-index: 20"
   >
     <p
       class="d-none d-lg-block text-dark-emphasis text-decoration-none h-fit-content fw-medium fs-5 px-2 px-lg-3"
@@ -60,7 +60,7 @@
     aria-controls="category"
   >
     <i class="fs-5 fa-solid fa-layer-group"></i>
-    <span class="d-none d-md-block fw-medium">category</span>
+    <span class="d-none d-md-block fw-medium">CATEGORY</span>
     <i class="d-block d-md-none fa-solid fa-caret-right"></i>
   </button>
 
@@ -341,7 +341,7 @@
       <div id="daily_suggest">
         <div
           class="daily_suggest-nav sticky-top bg-wall"
-          style="border-top: 1rem #f5f5fa solid"
+          style="border-top: 1rem #f5f5fa solid; z-index: 5"
         >
           <div
             class="d-flex align-items-center gap-2 p-2 p-lg-3 pb-1 pb-lg-1 rounded-2 rounded-bottom-0 bg-white"
@@ -366,7 +366,6 @@
                 role="tab"
                 aria-controls="{{tab.name}}"
                 aria-selected="{{$index == 0 ? 'true' : 'false'}}"
-                style="width: 12rem"
               >
                 <i
                   class="fa-solid {{tab.icon.class}} fs-4"
@@ -389,8 +388,10 @@
               role="tabpanel"
               tabindex="0"
             >
-              <div class="row row-cols-6 row-gap-2 gx-2">
-                <div class="col-4">
+              <div
+                class="row row-cols-2 row-cols-md-4 row-cols-xl-6 row-gap-2 gx-2"
+              >
+                <div class="col-12 col-md-6 col-xl-4">
                   <img
                     src="{{tab.banner}}"
                     class="img-fluid object-fit-cover rounded-2"
@@ -460,26 +461,17 @@
                 </div>
               </div>
             </div>
-            <!-- <div
-              class="tab-pane fade"
-              id="tab-tech"
-              role="tabpanel"
-              tabindex="0"
-            >
-              tech
-            </div>
-            <div
-              class="tab-pane fade"
-              id="tab-new_arrivals"
-              role="tabpanel"
-              tabindex="0"
-            >
-              new arrivals
-            </div> -->
             <!-- END TAB-CONTENT -->
           </div>
         </div>
       </div>
     </section>
+
+    <!-- WATCH MORE -->
+    <div class="d-flex justify-content-center mt-3">
+      <a href="#" class="btn btn-outline-info fs-5">
+        <<< <i class="fa-solid fa-shop"></i>MORE >>>
+      </a>
+    </div>
   </main>
 </div>
