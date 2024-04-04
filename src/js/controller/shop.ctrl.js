@@ -1,4 +1,5 @@
-export function ShopCtrl($scope, $rootScope) {
+export function ShopCtrl(app, $scope, $rootScope, $http) {
   $rootScope.page = "shop";
-  console.log("I am shop");
+
+  app.init().then(function () {});
 }

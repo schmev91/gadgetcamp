@@ -1,1 +1,60 @@
-<div class="row bg-white">I am the Shop you long for</div>
+<div class="row gap-3">
+  <aside
+    class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2 position-sticky overflow-y-scroll"
+    style="max-height: 100vh; scrollbar-width: none; top: 1rem; z-index: 20"
+  >
+    <p
+      class="d-none d-lg-block text-dark-emphasis text-decoration-none h-fit-content fw-medium fs-5 px-2 px-lg-3"
+    >
+      Category
+    </p>
+    <div
+      class="offcanvas offcanvas-start d-lg-block"
+      tabindex="-1"
+      id="category"
+      aria-labelledby="categoryLabel"
+    >
+      <div class="offcanvas-header">
+        <p class="offcanvas-title fs-5" id="categoryLabel">Category</p>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul
+          class="navbar-nav flex-column gap-2 text-start"
+          ng-if="categoryList"
+        >
+          <li
+            ng-repeat="category in categoryList"
+            class="nav-item link-opacity-75-hover hover-category px-3"
+          >
+            <a class="nav-link w-100" href="#!products/{{category}}">
+              {{(category.charAt(0).toUpperCase() +
+              category.slice(1)).replace('-'," ")}}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MOBILE CATEGORY -->
+  <button
+    class="d-lg-none position-fixed start-0 btn rounded-end-5 py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 w-fit-content"
+    style="z-index: 10"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#category"
+    aria-controls="category"
+  >
+    <i class="fs-5 fa-solid fa-layer-group"></i>
+    <span class="d-none d-md-block fw-medium">CATEGORY</span>
+    <i class="d-block d-md-none fa-solid fa-caret-right"></i>
+  </button>
+
+  <main class="col">I am your shop</main>
+</div>

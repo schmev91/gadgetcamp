@@ -162,8 +162,9 @@
               class="row row-cols-2 row-cols-md-3 row-cols-xl-6 row-gap-2 gx-2 gx-md-3"
             >
               <div class="col" ng-repeat="p in product_chunk">
-                <div
-                  class="card border-0 position-relative"
+                <a
+                  href="#!products/{{p.id}}"
+                  class="card border-0 position-relative text-decoration-none"
                   style="min-height: 100%"
                 >
                   <span
@@ -192,7 +193,7 @@
                       1).replace(".0","")}}<sup>$</sup>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           </div>
@@ -247,7 +248,7 @@
             >
               <div class="col" ng-repeat="p in product_chunk">
                 <a
-                  href="#"
+                  href="#!products/{{p.id}}"
                   class="card border-1 position-relative text-decoration-none"
                   style="min-height: 100%"
                 >
@@ -400,7 +401,7 @@
                 </div>
                 <div class="col" ng-repeat="p in tab.products">
                   <a
-                    href="#"
+                    href="#!products/{{p.id}}"
                     class="card border-1 position-relative text-decoration-none"
                   >
                     <div class="p-3">
@@ -469,7 +470,7 @@
 
     <!-- WATCH MORE -->
     <div class="d-flex justify-content-center mt-3">
-      <a href="#" class="btn btn-outline-info fs-5">
+      <a href="#!shop" class="btn btn-outline-info fs-5">
         <<< <i class="fa-solid fa-shop"></i>MORE >>>
       </a>
     </div>
