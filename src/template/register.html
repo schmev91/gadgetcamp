@@ -1,0 +1,136 @@
+<main class="container my-5">
+  <style>
+    .divider:after,
+    .divider:before {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #eee;
+    }
+  </style>
+  <section
+    class="w-75 mx-auto border border-light-subtle py-2 rounded-3 px-lg-5 bg-white"
+  >
+    <div class="container">
+      <h2 class="text-center text-dark-emphasis py-2">REGISTER</h2>
+      <div
+        class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center gy-5"
+      >
+        <div class="col-md-8 col-lg-5">
+          <img src="./src/img/register_img.png" class="img-fluid p-sm-5 p-lg-0
+          alt="Phone image" />
+        </div>
+        <div class="col-md-7 col-lg offset-xl-1">
+          <form name="form" ng-submit="register()">
+            <!-- Username input -->
+            <div class="mb-2">
+              <div class="input-group">
+                <label
+                  class="form-label fs-6 text-secondary m-0 input-group-text"
+                  for="username"
+                  ><i class="fa-solid fa-user"></i
+                ></label>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  class="form-control invalid"
+                  placeholder="Username"
+                  ng-class="{'is-invalid': form.username.$touched && form.username.$invalid
+                ,'is-valid': form.username.$touched && form.username.$valid}"
+                  required
+                  ng-model="userRegister.username"
+                  aria-describedby="usernameErr"
+                />
+                <small id="usernameErr" class="invalid-feedback"
+                  >Please enter username</small
+                >
+              </div>
+            </div>
+            <div class="input-group">
+              <label
+                class="form-label fs-6 text-secondary m-0 input-group-text"
+                for="username"
+                >@</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                ng-class="{'is-invalid': form.email.$touched && form.email.$invalid
+                ,'is-valid': form.email.$touched && form.email.$valid}"
+                placeholder="Email"
+                name="email"
+                required
+                aria-describedby="emailErr"
+                ng-model="userRegister.email"
+              />
+              <small id="emailErr" class="invalid-feedback"
+                >Please enter a valid email</small
+              >
+            </div>
+
+            <!-- Password input -->
+            <div class="d-flex gap-2 mt-1 flex-column flex-lg-row">
+              <div class="form-outline mb-lg-2">
+                <label class="form-label fs-6 text-secondary m-0" for="password"
+                  >Password</label
+                >
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  class="form-control"
+                  ng-class="{'is-invalid': form.password.$touched && form.password.$invalid
+                ,'is-valid': form.password.$touched && form.password.$valid}"
+                  aria-describedby="passwordErr"
+                  ng-model="userRegister.password"
+                  required
+                />
+                <small id="passwordErr" class="invalid-feedback"
+                  >Please enter your password</small
+                >
+              </div>
+
+              <div class="form-outline mb-lg-2">
+                <label
+                  class="form-label fs-6 text-secondary m-0"
+                  for="reenterPassword"
+                  >Confirm password</label
+                >
+                <input
+                  id="reenterPassword"
+                  name="reenterPassword"
+                  type="password"
+                  class="form-control"
+                  ng-class="{'is-invalid': form.reenterPassword.$touched 
+                  && (
+                     !form.reenterPassword.$modelValue
+                  || form.reenterPassword.$modelValue != form.password.$modelValue
+                  )
+                ,'is-valid': form.reenterPassword.$touched && form.reenterPassword.$valid}"
+                  aria-describedby="reenterPasswordErr"
+                  ng-model="userRegister.reenterPassword"
+                  required
+                />
+                <small id="reenterPasswordErr" class="invalid-feedback"
+                  >Please enter your password</small
+                >
+              </div>
+            </div>
+
+            <div class="d-flex gap-3 mt-4 justify-content-between">
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-secondary">Register</button>
+              <a
+                href="#!auth/login"
+                class="text-secondary fw-light"
+                style="height: fit-content"
+                >Already register?</a
+              >
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

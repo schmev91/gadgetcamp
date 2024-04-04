@@ -3,6 +3,7 @@ import { AccountCtrl } from "./controller/account.ctrl.js";
 import { CartCtrl } from "./controller/cart.ctrl.js";
 import { ShopCtrl } from "./controller/shop.ctrl.js";
 import { ProductCtrl } from "./controller/product.ctrl.js";
+import { AuthCtrl } from "./controller/auth.ctrl.js";
 
 angular
   .module("App", ["ngRoute"])
@@ -16,6 +17,9 @@ angular
           $rootScope.products = productsData.products;
           $rootScope.categoryList = categoriesData;
           $rootScope.isDataLoaded = true;
+
+          let activeUser = sessionStorage.getItem("activeUser");
+          if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
         });
       } else return Promise.resolve();
     };
@@ -42,6 +46,18 @@ angular
         templateUrl: "./src/template/account.html",
         controller: "AccountController",
       })
+      .when("/auth/login", {
+        templateUrl: "./src/template/login.html",
+        controller: "AuthController",
+      })
+      .when("/auth/register", {
+        templateUrl: "./src/template/register.html",
+        controller: "AuthController",
+      })
+      .when("/auth/logout", {
+        templateUrl: "./src/template/login.html",
+        controller: "AuthController",
+      })
       .when("/cart", {
         templateUrl: "./src/template/cart.html",
         controller: "CartController",
@@ -53,6 +69,7 @@ angular
   .controller("HomeController", HomeCtrl)
   .controller("ShopController", ShopCtrl)
   .controller("AccountController", AccountCtrl)
+  .controller("AuthController", AuthCtrl)
   .controller("CartController", CartCtrl)
   .controller("ProductController", ProductCtrl)
   .directive("maintainRatio", function () {

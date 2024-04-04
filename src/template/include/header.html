@@ -10,7 +10,7 @@
         <img
           class="img-fluid"
           style="height: 1rem"
-          ng-src="{{ page == 'home' ? './src/img/gadgetcamp-logo.png' : './src/img/gadgetcamp-logo-off.png' }}"
+          src="./src/img/gadgetcamp-logo.png"
           alt=""
         />
       </a>
@@ -19,8 +19,27 @@
       id="top-bar-account"
       class="col d-flex justify-content-end gap-2 gap-md-3"
     >
-      <a class="text-secondary-emphasis" href="">Sign up</a>
-      <a class="text-secondary-emphasis" href="">Login</a>
+      <a
+        class="text-secondary-emphasis"
+        ng-show="!activeUser"
+        href="#!auth/register"
+        >Sign up</a
+      >
+      <a
+        class="text-secondary-emphasis"
+        ng-show="!activeUser"
+        href="#!auth/login"
+        >Login</a
+      >
+      <span class="text-secondary-emphasis fw-medium me-3" ng-show="activeUser"
+        >Hello {{activeUser.username}}!</span
+      >
+      <a
+        class="text-secondary-emphasis"
+        ng-show="activeUser"
+        href="#!auth/logout"
+        >Logout</a
+      >
     </div>
   </div>
 </div>
@@ -32,7 +51,7 @@
         <a href="#!home">
           <img
             class="img-fluid hover-bounce"
-            ng-src="{{ page == 'home' ? './src/img/gadgetcamp-logo.png' : './src/img/gadgetcamp-logo-off.png' }}"
+            src="./src/img/gadgetcamp-logo.png"
             alt=""
           />
         </a>

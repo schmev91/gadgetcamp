@@ -3,6 +3,9 @@ export function ProductCtrl(app, $scope, $rootScope, $routeParams) {
 
   app.init().then(function () {
     console.log("I am product");
-    console.log($routeParams.id);
+    const productId = $routeParams.id;
+    $scope.p = $rootScope.products.find(({ id }) => id == productId);
+
+    console.log($scope.p);
   });
 }
