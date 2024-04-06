@@ -1,11 +1,24 @@
-export function ProductCtrl(app, $scope, $rootScope, $routeParams) {
+export function ProductCtrl($scope, $rootScope, $routeParams, app) {
   $rootScope.page = "product";
 
   app.init().then(function () {
-    console.log("I am product");
     const productId = $routeParams.id;
-    $scope.p = $rootScope.products.find(({ id }) => id == productId);
+    $scope.$apply(function () {
+      $scope.p = $rootScope.products.find(({ id }) => id == productId);
 
-    console.log($scope.p);
+      //load best rated products
+      $scope.bestRatedProducts = [];
+      let prodSortByRating = $rootScope.products.sort(
+          (p1, p2) => p2.rating - p1.rating
+        ),
+        productAmount = 3;
+
+      prodSortByRating = prodSortByRating.filter(({ id }) => id != productId);
+      for (let i = 0; i < 3; i++) {
+        $scope.bestRatedProducts.push(
+          prodSortByRating.slice(i * productAmount, (i + 1) * productAmount)
+        );
+      }
+    });
   });
 }

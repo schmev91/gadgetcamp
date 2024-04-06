@@ -8,23 +8,23 @@ import { AuthCtrl } from "./controller/auth.ctrl.js";
 angular
   .module("App", ["ngRoute"])
   .service("app", function ($rootScope, $http) {
-    this.init = function () {
+    this.init = async function () {
       if (!$rootScope.isDataLoaded) {
         let activeUser = sessionStorage.getItem("activeUser");
         if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
 
-        return Promise.all([
-          $http.get("https://dummyjson.com/products?limit=100", {
-            cache: true,
-          }),
-          $http.get("https://dummyjson.com/products/categories", {
-            cache: true,
-          }),
-        ]).then(([{ data: productsData }, { data: categoriesData }]) => {
-          $rootScope.products = productsData.products;
-          $rootScope.categoryList = categoriesData;
-          $rootScope.isDataLoaded = true;
-        });
+        const [{ data: productsData }, { data: categoriesData }] =
+          await Promise.all([
+            $http.get("https://dummyjson.com/products?limit=100", {
+              cache: true,
+            }),
+            $http.get("https://dummyjson.com/products/categories", {
+              cache: true,
+            }),
+          ]);
+        $rootScope.products = productsData.products;
+        $rootScope.categoryList = categoriesData;
+        $rootScope.isDataLoaded = true;
       } else return Promise.resolve();
     };
   })
@@ -72,10 +72,10 @@ angular
   })
   .controller("HomeController", HomeCtrl)
   .controller("ShopController", ShopCtrl)
+  .controller("ProductController", ProductCtrl)
   .controller("AccountController", AccountCtrl)
   .controller("AuthController", AuthCtrl)
   .controller("CartController", CartCtrl)
-  .controller("ProductController", ProductCtrl)
   .directive("maintainRatio", function () {
     return {
       restrict: "A",

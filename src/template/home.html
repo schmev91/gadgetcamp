@@ -403,8 +403,8 @@
             <!-- START TAB-CONTENT -->
             <div
               ng-repeat="tab in dailySug_data"
-              class="tab-pane"
-              ng-class="{'fade show active': $index == 0}"
+              class="tab-pane fade"
+              ng-class="{'show active': $index == 0}"
               id="{{tab.name}}"
               role="tabpanel"
               tabindex="0"

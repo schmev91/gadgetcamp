@@ -101,6 +101,13 @@
 /*-----------HEADER-----------*/
 /*============================*/
 
-/*============================*/
-/*-----------FOOTER-----------*/
-/*============================*/
+.nav-item:has(.active) img {
+  border: 2px solid cornflowerblue;
+}
+.nav-item :not(.active) img {
+  transition: 0.3s ease all;
+  opacity: 0.6;
+}
+.nav-item:hover img {
+  opacity: 1;
+}

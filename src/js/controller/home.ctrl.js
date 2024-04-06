@@ -67,6 +67,7 @@ export function HomeCtrl($scope, $rootScope, $http, $interval, app) {
         },
       ];
     };
+
     homeHandler();
 
     // SALE-SECTION
