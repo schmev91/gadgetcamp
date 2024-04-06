@@ -203,7 +203,12 @@
           type="button"
           data-bs-target="#sale"
           data-bs-slide="prev"
-          style="left: -5% !important"
+          style="
+            top: 50%;
+            transform: translateY(-50%);
+            width: fit-content;
+            height: fit-content;
+          "
         >
           <span
             class="carousel-control-prev-icon bg-secondary bg-opacity-50 rounded-circle"
@@ -216,7 +221,12 @@
           type="button"
           data-bs-target="#sale"
           data-bs-slide="next"
-          style="right: -5% !important"
+          style="
+            top: 50%;
+            transform: translateY(-50%);
+            width: fit-content;
+            height: fit-content;
+          "
         >
           <span
             class="carousel-control-next-icon bg-secondary bg-opacity-50 rounded-circle"
@@ -313,7 +323,12 @@
           type="button"
           data-bs-target="#best_rated"
           data-bs-slide="prev"
-          style="left: -5% !important"
+          style="
+            top: 50%;
+            transform: translateY(-50%);
+            width: fit-content;
+            height: fit-content;
+          "
         >
           <span
             class="carousel-control-prev-icon bg-secondary bg-opacity-50 rounded-circle"
@@ -326,7 +341,12 @@
           type="button"
           data-bs-target="#best_rated"
           data-bs-slide="next"
-          style="right: -5% !important"
+          style="
+            top: 50%;
+            transform: translateY(-50%);
+            width: fit-content;
+            height: fit-content;
+          "
         >
           <span
             class="carousel-control-next-icon bg-secondary bg-opacity-50 rounded-circle"
@@ -404,7 +424,7 @@
                     href="#!products/{{p.id}}"
                     class="card border-1 position-relative text-decoration-none"
                   >
-                    <div class="p-3">
+                    <div class="p-2">
                       <img
                         src="{{p.thumbnail}}"
                         class="card-img-top img-fluid object-fit-cover rounded-2"

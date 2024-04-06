@@ -10,16 +10,20 @@ angular
   .service("app", function ($rootScope, $http) {
     this.init = function () {
       if (!$rootScope.isDataLoaded) {
+        let activeUser = sessionStorage.getItem("activeUser");
+        if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
+
         return Promise.all([
-          $http.get("https://dummyjson.com/products?limit=100"),
-          $http.get("https://dummyjson.com/products/categories"),
+          $http.get("https://dummyjson.com/products?limit=100", {
+            cache: true,
+          }),
+          $http.get("https://dummyjson.com/products/categories", {
+            cache: true,
+          }),
         ]).then(([{ data: productsData }, { data: categoriesData }]) => {
           $rootScope.products = productsData.products;
           $rootScope.categoryList = categoriesData;
           $rootScope.isDataLoaded = true;
-
-          let activeUser = sessionStorage.getItem("activeUser");
-          if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
         });
       } else return Promise.resolve();
     };
