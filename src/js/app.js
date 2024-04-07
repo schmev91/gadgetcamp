@@ -7,23 +7,31 @@ import { AuthCtrl } from "./controller/auth.ctrl.js";
 
 angular
   .module("App", ["ngRoute"])
-  .service("app", function ($rootScope, $http) {
+  .service("app", function ($rootScope, $http, $anchorScroll) {
     this.init = async function () {
+      $anchorScroll();
       if (!$rootScope.isDataLoaded) {
         let activeUser = sessionStorage.getItem("activeUser");
         if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
 
-        const [{ data: productsData }, { data: categoriesData }] =
-          await Promise.all([
-            $http.get("https://dummyjson.com/products?limit=100", {
-              cache: true,
-            }),
-            $http.get("https://dummyjson.com/products/categories", {
-              cache: true,
-            }),
-          ]);
+        const [
+          { data: productsData },
+          { data: categoriesData },
+          { data: bannersData },
+        ] = await Promise.all([
+          $http.get("https://dummyjson.com/products?limit=100", {
+            cache: true,
+          }),
+          $http.get("https://dummyjson.com/products/categories", {
+            cache: true,
+          }),
+          $http.get("./src/json/home.banners.json", {
+            cache: true,
+          }),
+        ]);
         $rootScope.products = productsData.products;
         $rootScope.categoryList = categoriesData;
+        $rootScope.banners = bannersData;
         $rootScope.isDataLoaded = true;
       } else return Promise.resolve();
     };

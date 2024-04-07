@@ -49,3 +49,12 @@ function user(username, email, password) {
     password,
   };
 }
+
+export function shuffleArray(array, length) {
+  const shuffledArray = array.slice(); // Create a shallow copy of the original array
+  for (let i = shuffledArray.length - 1; i > length - 1; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray.slice(0, length); // Return a new array with specified length
+}

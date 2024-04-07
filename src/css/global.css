@@ -5,6 +5,10 @@
   --tertiary_color: #477987;
   --star-color: #ffc70d;
 }
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 .hover-underline:hover {
   color: var(--sub_color);
   text-decoration: underline !important;
@@ -101,13 +105,13 @@
 /*-----------HEADER-----------*/
 /*============================*/
 
-.nav-item:has(.active) img {
+.images-nav:has(.active) img {
   border: 2px solid cornflowerblue;
 }
-.nav-item :not(.active) img {
+.images-nav :not(.active) img {
   transition: 0.3s ease all;
   opacity: 0.6;
 }
-.nav-item:hover img {
+.images-nav:hover img {
   opacity: 1;
 }

@@ -1,126 +1,267 @@
 <div class="row gx-3 my-3 pb-5 mb-5">
-  <div id="product-image" class="col-4">
-    <div class="bg-white rounded-2 p-3">
-      <div class="tab-content" id="pills-tabContent">
-        <div
-          ng-repeat="img in p.images"
-          class="tab-pane fade"
-          ng-class="{'show active': !$index}"
-          id="img-{{$index}}"
-          role="tabpanel"
-          tabindex="0"
-        >
-          <div class="">
-            <img
-              src="{{img}}"
-              class="w-100 object-fit-cover rounded-2"
-              maintain-ratio
-              alt=""
-            />
-          </div>
-        </div>
-      </div>
-      <ul
-        class="nav nav-pills d-flex gap-2 mt-3"
-        style="flex-wrap: nowrap"
-        id="pills-tab"
-        role="tablist"
+  <div class="col">
+    <!-- start major first col -->
+    <div class="row">
+      <div
+        id="product-image"
+        class="col-5 sticky-top h-fit-content"
+        style="top: 1rem"
       >
-        <li class="nav-item" role="presentation" ng-repeat="img in p.images">
-          <div
-            class=""
-            ng-class="{'active': !$index}"
-            id="img-{{$index}}-tab"
-            data-bs-toggle="pill"
-            data-bs-target="#img-{{$index}}"
-            role="tab"
-          >
-            <img
-              src="{{img}}"
-              style="width: 4rem"
-              class="img-thumbnail p-1 rounded-2 object-fit-cover"
-              alt=""
-              maintain-ratio
-            />
-          </div>
-        </li>
-      </ul>
-    </div>
-  </div>
-
-  <div id="product-info" class="col d-flex flex-column gap-3">
-    <div aria-label="info-first_block" class="bg-white rounded-2 p-3">
-      <small class="text-primary fw-medium rounded-3 w-fit-content">
-        <span
-          class="bg-primary-subtle rounded-3 px-2"
-          style="font-size: 0.75rem"
-          ><i class="fa-solid fa-circle-check"></i> VERIFIED BRAND</span
-        >
-        {{p.brand}}
-      </small>
-      <h3 class="text-dark-emphasis">{{p.title}}</h3>
-      <div aria-label="rating and stock" class="d-flex gap-2 mt-3">
-        <div
-          id="rating"
-          class="d-flex gap-1 text-center align-items-center"
-          style="font-size: 1rem"
-        >
-          <div
-            class="progress h-fit-content"
-            role="progressbar"
-            aria-valuenow="{{(p.rating / 5) * 100}}"
-            aria-valuemin="0"
-            aria-valuemax="100"
-            style="background-clip: text"
-          >
+        <!-- start first col -->
+        <div class="bg-white rounded-2 p-3">
+          <div class="tab-content" id="pills-tabContent">
             <div
-              class="progress-bar bg-yellow d-flex flex-row rounded-0 align-items-center justify-content-start fs-5"
-              ng-style="{'width': ((p.rating / 5) * 100) + '%'}"
-              style="background-clip: text; color: transparent"
+              ng-repeat="img in p.images"
+              class="tab-pane fade"
+              ng-class="{'show active': !$index}"
+              id="img-{{$index}}"
+              role="tabpanel"
+              tabindex="0"
             >
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
-              ><i class="fa-solid fa-star"></i>
+              <div class="">
+                <img
+                  src="{{img}}"
+                  class="w-100 object-fit-cover rounded-2"
+                  maintain-ratio
+                  alt=""
+                />
+              </div>
             </div>
           </div>
+          <ul
+            class="nav nav-pills d-flex gap-2 mt-3"
+            style="flex-wrap: nowrap"
+            id="pills-tab"
+            role="tablist"
+          >
+            <li
+              class="nav-item images-nav"
+              role="presentation"
+              ng-repeat="img in p.images"
+            >
+              <div
+                class=""
+                ng-class="{'active': !$index}"
+                id="img-{{$index}}-tab"
+                data-bs-toggle="pill"
+                data-bs-target="#img-{{$index}}"
+                role="tab"
+              >
+                <img
+                  src="{{img}}"
+                  style="width: 4rem"
+                  class="img-thumbnail p-1 rounded-2 object-fit-cover"
+                  alt=""
+                  maintain-ratio
+                />
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- end first col -->
+      </div>
 
-          <span class="text-body-tertiary"> {{p.rating}} </span>
+      <div id="product-info" class="col d-flex flex-column gap-3">
+        <!-- start second col -->
+        <div aria-label="info-first_block" class="bg-white rounded-2 p-3">
+          <small class="text-primary fw-medium rounded-3 w-fit-content">
+            <span
+              class="bg-primary-subtle rounded-3 px-2"
+              style="font-size: 0.75rem"
+              ><i class="fa-solid fa-circle-check"></i> VERIFIED BRAND</span
+            >
+            {{p.brand}}
+          </small>
+          <h3 class="text-dark-emphasis">{{p.title}}</h3>
+          <div aria-label="rating and stock" class="d-flex gap-2 mt-3">
+            <div
+              id="rating"
+              class="d-flex gap-1 text-center align-items-center"
+              style="font-size: 1rem"
+            >
+              <div
+                class="progress h-fit-content"
+                role="progressbar"
+                aria-valuenow="{{(p.rating / 5) * 100}}"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                style="background-clip: text"
+              >
+                <div
+                  class="progress-bar bg-yellow d-flex flex-row rounded-0 align-items-center justify-content-start fs-5"
+                  ng-style="{'width': ((p.rating / 5) * 100) + '%'}"
+                  style="background-clip: text; color: transparent"
+                >
+                  <i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i
+                  ><i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+
+              <span class="text-body-tertiary"> {{p.rating}} </span>
+            </div>
+
+            <span class="text-body-tertiary fw-light">|</span>
+            <div class="text-body-tertiary">Stock: {{p.stock}}</div>
+          </div>
+          <div class="d-flex align-items-center gap-2 mt-3">
+            <h2 class="text-dark-emphasis">
+              {{p.price * ( 100 - p.discountPercentage ) / 100 | number: 2}}<sup
+                >$</sup
+              >
+            </h2>
+            <small
+              class="px-1 text-secondary bg-light rounded-3"
+              style="font-size: 0.75rem"
+              >-{{p.discountPercentage}}%</small
+            >
+          </div>
+        </div>
+        <div aria-label="info-second_block" class="bg-white rounded-2 p-3">
+          <h5 class="text-secondary">Description</h5>
+          <div class="text-body-secondary">{{p.description}}</div>
         </div>
 
-        <span class="text-body-tertiary fw-light">|</span>
-        <div class="text-body-tertiary">Stock: {{p.stock}}</div>
-      </div>
-      <div class="d-flex align-items-center gap-2 mt-3">
-        <h2 class="text-dark-emphasis">
-          {{p.price * ( 100 - p.discountPercentage ) / 100 | number: 2}}<sup
-            >$</sup
-          >
-        </h2>
-        <small
-          class="px-1 text-secondary bg-light rounded-3"
-          style="font-size: 0.75rem"
-          >-{{p.discountPercentage}}%</small
+        <div
+          aria-label="info-third_block related products"
+          class="bg-white rounded-2 p-3"
         >
+          <section>
+            <div class="d-flex align-items-center gap-2 mb-1">
+              <h5 class="fw-medium text-secondary">Related products</h5>
+            </div>
+            <div id="related-products" class="carousel slide">
+              <div class="carousel-inner">
+                <div
+                  class="carousel-item"
+                  ng-class="{'active': $index == 0}"
+                  ng-repeat="product_chunk in relatedProductsCarousel"
+                >
+                  <div class="row row-cols-2 row-cols-md-4 row-gap-2 gx-2">
+                    <div class="col" ng-repeat="p in product_chunk">
+                      <a
+                        href="#!products/{{p.id}}"
+                        class="card border-1 position-relative text-decoration-none p-1"
+                        style="min-height: 100%"
+                      >
+                        <div class="">
+                          <img
+                            src="{{p.thumbnail}}"
+                            class="card-img-top img-fluid object-fit-cover rounded-2"
+                            maintain-ratio
+                            width="100%"
+                            style="height: 160px"
+                            alt=""
+                          />
+                        </div>
+                        <div class="card-body d-flex flex-column p-0">
+                          <div
+                            class="small text-dark-emphasis text-nowrap overflow-hidden"
+                            style="text-overflow: ellipsis"
+                          >
+                            {{p.title}}
+                          </div>
+                          <div class="d-flex gap-1" style="font-size: 0.7rem">
+                            <div
+                              class="progress"
+                              role="progressbar"
+                              aria-valuenow="{{(p.rating / 5) * 100}}"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                              style="background-clip: text"
+                            >
+                              <div
+                                class="progress-bar bg-yellow d-flex flex-row rounded-0 align-items-center justify-content-start"
+                                ng-style="{'width': ((p.rating / 5) * 100) + '%'}"
+                                style="
+                                  background-clip: text;
+                                  color: transparent;
+                                "
+                              >
+                                <i class="fa-solid fa-star"></i
+                                ><i class="fa-solid fa-star"></i
+                                ><i class="fa-solid fa-star"></i
+                                ><i class="fa-solid fa-star"></i
+                                ><i class="fa-solid fa-star"></i>
+                              </div>
+                            </div>
+
+                            <span class="text-secondary"> {{p.rating}} </span>
+                          </div>
+                          <div class="flex-grow-1 mt-2">
+                            <span class="fs-5 fw-medium"> {{p.price}}</span
+                            ><sup>$</sup>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#related-products"
+                data-bs-slide="prev"
+                style="
+                  top: 50%;
+                  transform: translateY(-50%);
+                  width: fit-content;
+                  height: fit-content;
+                "
+              >
+                <span
+                  class="carousel-control-prev-icon bg-secondary bg-opacity-50 rounded-circle"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#related-products"
+                data-bs-slide="next"
+                style="
+                  top: 50%;
+                  transform: translateY(-50%);
+                  width: fit-content;
+                  height: fit-content;
+                "
+              >
+                <span
+                  class="carousel-control-next-icon bg-secondary bg-opacity-50 rounded-circle"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <!-- end second col -->
       </div>
-    </div>
-    <div aria-label="info-second_block" class="bg-white rounded-2 p-3">
-      <h5 class="text-secondary">Description</h5>
-      <div class="text-body-secondary">{{p.description}}</div>
     </div>
 
-    <div aria-label="best rated product" class="bg-white rounded-2 p-3">
+    <div
+      aria-label="first major col second block"
+      class="bg-white rounded-2 p-3 mt-3"
+    >
       <section>
         <div class="d-flex align-items-center gap-2 mb-1">
-          <h5 class="fw-medium text-secondary">Best rated</h5>
+          <h5 class="fw-medium text-secondary">Suggestion</h5>
         </div>
-        <div id="best_rated" class="carousel slide">
+        <div id="suggestion" class="carousel slide">
           <div class="carousel-inner">
             <div
               class="carousel-item"
               ng-class="{'active': $index == 0}"
-              ng-repeat="product_chunk in bestRatedProducts"
+              ng-repeat="product_chunk in suggestionCarousel"
             >
-              <div class="row row-cols-2 row-cols-md-3 row-gap-2 gx-2">
+              <div
+                class="row row-cols-2 row-cols-md-3 row-cols-lg-6 row-gap-2 gx-2"
+              >
                 <div class="col" ng-repeat="p in product_chunk">
                   <a
                     href="#!products/{{p.id}}"
@@ -187,7 +328,7 @@
           <button
             class="carousel-control-prev"
             type="button"
-            data-bs-target="#best_rated"
+            data-bs-target="#suggestion"
             data-bs-slide="prev"
             style="
               top: 50%;
@@ -205,7 +346,7 @@
           <button
             class="carousel-control-next"
             type="button"
-            data-bs-target="#best_rated"
+            data-bs-target="#suggestion"
             data-bs-slide="next"
             style="
               top: 50%;
@@ -223,9 +364,134 @@
         </div>
       </section>
     </div>
+    <!-- end major first col -->
   </div>
 
-  <div class="col-3">
-    <div class="bg-white rounded-2 p-2" style="height: 50vh">oiqjowidj</div>
+  <div class="col-3 sticky-top h-fit-content" style="top: 1rem">
+    <!-- start second major col -->
+    <div class="bg-white rounded-2 p-3">
+      <div id="store">
+        <div class="d-flex gap-2">
+          <div class="store-logo">
+            <img
+              src="./src/img/gadgetcamp-logo-compact.png"
+              class="object-fit-contain bg-light rounded-circle img-thumbnail"
+              style="width: 3.6rem"
+              maintain-ratio
+              alt=""
+            />
+          </div>
+          <div class="d-flex flex-column justify-content-between">
+            <div class="store-title text-dark fw-medium">
+              Gadgetcamp Official Store
+            </div>
+            <div class="store-info d-flex align-items-center gap-2">
+              <small>
+                <span
+                  class="text-primary bg-primary-subtle rounded-2 px-1 opacity-75"
+                  style="font-size: 0.75rem"
+                  ><i class="fa-solid fa-circle-check"></i> Official</span
+                >
+              </small>
+
+              <span class="seperator text-body-tertiary fw-light">|</span>
+              <div
+                class="d-flex flex-column text-start"
+                style="font-size: 0.9rem"
+              >
+                <span class="text-secondary fw-medium">
+                  {{storeRating | number: 2}}
+                  <i class="fa-solid fa-star text-yellow"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="text-secondary" />
+      <div class="product-amount">
+        <label for="product-amount" class="fw-medium mb-2 text-dark-emphasis"
+          >Amount</label
+        >
+        <div class="d-flex gap-1 text-secondary">
+          <button
+            ng-click="amountDown()"
+            class="btn border border-secondary"
+            ng-class="{'opacity-25': productAmount < 2}"
+          >
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <input
+            id="product-amount"
+            class="form-control rounded-2 fw-medium text-center border-secondary"
+            style="width: 2.8rem"
+            ng-model="productAmount"
+            ng-init="productAmount = 1"
+            ng-blur="productAmount = (productAmount < 1) ? 1 : productAmount"
+            type="number"
+          />
+          <button class="btn border border-secondary" ng-click="amountUp()">
+            <i class="fa-solid fa-plus"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="provisional-sums text-dark-emphasis mt-3">
+        <label class="fw-medium mb-2">Provisional sums</label>
+        <h3>
+          {{(p.price * ( 100 - p.discountPercentage ) / 100) * productAmount |
+          number: 2}}<sup>$</sup>
+        </h3>
+      </div>
+
+      <div class="product-interaction-btns mt-3 d-flex flex-column gap-2">
+        <button class="btn bg-danger bg-accent text-white fw-medium">
+          <i class="fa-solid fa-money-bill"></i> Buy Now
+        </button>
+        <button class="btn btn-outline-secondary">
+          <i class="fa-solid fa-cart-plus"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+
+    <!-- BANNER -->
+    <section id="banner-container" class="rounded-2 mt-3">
+      <div id="banner" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            ng-class="{'active':banner.active}"
+            ng-repeat="banner in banners"
+          >
+            <a href="{{banner.link}}">
+              <img
+                src="{{banner.image}}"
+                class="d-block w-100 object-fit-cover rounded-2"
+              />
+            </a>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#banner"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+    <!-- end second major col -->
   </div>
 </div>
