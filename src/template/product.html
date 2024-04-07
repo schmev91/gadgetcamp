@@ -58,6 +58,49 @@
             </li>
           </ul>
         </div>
+        <!-- BANNER -->
+        <section id="banner-container" class="rounded-2 mt-3">
+          <div id="banner" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div
+                class="carousel-item"
+                ng-class="{'active':banner.active}"
+                ng-repeat="banner in banners"
+              >
+                <a href="{{banner.link}}">
+                  <img
+                    src="{{banner.image}}"
+                    class="d-block w-100 object-fit-cover rounded-2"
+                  />
+                </a>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#banner"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleAutoplaying"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </section>
         <!-- end first col -->
       </div>
 
@@ -437,7 +480,7 @@
         </div>
       </div>
 
-      <div class="provisional-sums text-dark-emphasis mt-3">
+      <div class="provisional-sums text-dark-emphasis mt-4">
         <label class="fw-medium mb-2">Provisional sums</label>
         <h3>
           {{(p.price * ( 100 - p.discountPercentage ) / 100) * productAmount |
@@ -445,7 +488,7 @@
         </h3>
       </div>
 
-      <div class="product-interaction-btns mt-3 d-flex flex-column gap-2">
+      <div class="product-interaction-btns mt-4 d-flex flex-column gap-2">
         <button class="btn bg-danger bg-accent text-white fw-medium">
           <i class="fa-solid fa-money-bill"></i> Buy Now
         </button>
@@ -455,43 +498,6 @@
       </div>
     </div>
 
-    <!-- BANNER -->
-    <section id="banner-container" class="rounded-2 mt-3">
-      <div id="banner" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div
-            class="carousel-item"
-            ng-class="{'active':banner.active}"
-            ng-repeat="banner in banners"
-          >
-            <a href="{{banner.link}}">
-              <img
-                src="{{banner.image}}"
-                class="d-block w-100 object-fit-cover rounded-2"
-              />
-            </a>
-          </div>
-        </div>
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#banner"
-          data-bs-slide="prev"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#carouselExampleAutoplaying"
-          data-bs-slide="next"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-    </section>
     <!-- end second major col -->
   </div>
 </div>
