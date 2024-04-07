@@ -29,10 +29,12 @@ angular
             cache: true,
           }),
         ]);
-        $rootScope.products = productsData.products;
-        $rootScope.categoryList = categoriesData;
-        $rootScope.banners = bannersData;
-        $rootScope.isDataLoaded = true;
+        $rootScope.$apply(function () {
+          $rootScope.products = productsData.products;
+          $rootScope.categoryList = categoriesData;
+          $rootScope.banners = bannersData;
+          $rootScope.isDataLoaded = true;
+        });
       } else return Promise.resolve();
     };
   })

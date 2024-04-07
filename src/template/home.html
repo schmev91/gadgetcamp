@@ -122,7 +122,7 @@
         <button
           class="carousel-control-next"
           type="button"
-          data-bs-target="#carouselExampleAutoplaying"
+          data-bs-target="#banner"
           data-bs-slide="next"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
@@ -262,7 +262,7 @@
                   class="card border-1 position-relative text-decoration-none"
                   style="min-height: 100%"
                 >
-                  <div class="p-3">
+                  <div class="p-3 position-relative">
                     <img
                       src="{{p.thumbnail}}"
                       class="card-img-top img-fluid object-fit-cover rounded-2"
@@ -271,6 +271,11 @@
                       style="height: 160px"
                       alt=""
                     />
+                    <span
+                      class="position-absolute text-secondary bg-light end-0 px-1 rounded-start-1"
+                      style="font-size: 0.7rem; top: 1.3rem"
+                      >-{{p.discountPercentage}}%</span
+                    >
                   </div>
                   <div class="card-body d-flex flex-column">
                     <div
@@ -309,7 +314,10 @@
                       <span class="text-secondary"> {{p.rating}} </span>
                     </div>
                     <div class="flex-grow-1 mt-2">
-                      <span class="fs-5 fw-medium"> {{p.price}} </span>
+                      <span class="fs-5 fw-medium"
+                        >{{p.price - (p.price * p.discountPercentage / 100) |
+                        number: 2}}</span
+                      >
                       <sup>$</sup>
                     </div>
                   </div>
@@ -424,7 +432,7 @@
                     href="#!products/{{p.id}}"
                     class="card border-1 position-relative text-decoration-none"
                   >
-                    <div class="p-2">
+                    <div class="p-2 position-relative">
                       <img
                         src="{{p.thumbnail}}"
                         class="card-img-top img-fluid object-fit-cover rounded-2"
@@ -433,6 +441,11 @@
                         style="height: 160px"
                         alt=""
                       />
+                      <span
+                        class="position-absolute text-secondary bg-light end-0 px-1 rounded-start-1"
+                        style="font-size: 0.7rem; top: 0.8rem"
+                        >-{{p.discountPercentage}}%</span
+                      >
                     </div>
                     <div class="card-body d-flex flex-column">
                       <div
@@ -474,7 +487,10 @@
                         <span class="text-secondary"> {{p.rating}} </span>
                       </div>
                       <div class="flex-grow-1 mt-2">
-                        <span class="fs-5 fw-medium"> {{p.price}} </span>
+                        <span class="fs-5 fw-medium"
+                          >{{p.price - (p.price * p.discountPercentage / 100) |
+                          number: 2}}</span
+                        >
                         <sup>$</sup>
                       </div>
                     </div>
