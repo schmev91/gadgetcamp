@@ -4,7 +4,7 @@
     <div class="row">
       <div
         id="product-image"
-        class="col-5 sticky-top h-fit-content"
+        class="col-md-5 sticky-md-top mb-3 mb-md-0 h-fit-content"
         style="top: 1rem"
       >
         <!-- start first col -->
@@ -30,7 +30,6 @@
           </div>
           <ul
             class="nav nav-pills d-flex gap-2 mt-3"
-            style="flex-wrap: nowrap"
             id="pills-tab"
             role="tablist"
           >
@@ -59,7 +58,7 @@
           </ul>
         </div>
         <!-- BANNER -->
-        <section id="banner-container" class="rounded-2 mt-3">
+        <section id="banner-container" class="rounded-2 d-none d-md-block mt-3">
           <div id="banner" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               <div
@@ -161,6 +160,89 @@
               >-{{p.discountPercentage}}%</small
             >
           </div>
+
+          <div aria-label="mobile_product_interaction" class="d-xl-none">
+            <div class="product-amount">
+              <label
+                for="product-amount"
+                class="fw-medium mb-2 text-dark-emphasis"
+                >Amount</label
+              >
+              <div class="d-flex gap-1 text-secondary">
+                <button
+                  ng-click="amountDown()"
+                  class="btn border border-secondary"
+                  ng-class="{'opacity-25': productAmount < 2}"
+                >
+                  <i class="fa-solid fa-minus"></i>
+                </button>
+                <input
+                  id="product-amount"
+                  class="form-control rounded-2 fw-medium text-center border-secondary"
+                  style="width: 2.8rem"
+                  ng-model="productAmount"
+                  ng-init="productAmount = 1"
+                  ng-blur="productAmount = (productAmount < 1) ? 1 : productAmount"
+                  type="number"
+                />
+                <button
+                  class="btn border border-secondary"
+                  ng-click="amountUp()"
+                >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="product-interaction-btns mt-4 d-flex flex-xl-column gap-2"
+            >
+              <button class="btn bg-danger bg-accent text-white fw-medium">
+                <i class="fa-solid fa-money-bill"></i> Buy Now
+              </button>
+              <button class="btn btn-outline-secondary">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="store-mobile" class="bg-white p-3 rounded-2 d-xl-none">
+          <div class="d-flex gap-2">
+            <div class="store-logo">
+              <img
+                src="./src/img/gadgetcamp-logo-compact.png"
+                class="object-fit-contain bg-light rounded-circle img-thumbnail"
+                style="width: 3.6rem"
+                maintain-ratio
+                alt=""
+              />
+            </div>
+            <div class="d-flex flex-column justify-content-between">
+              <div class="store-title text-dark fw-medium">
+                Gadgetcamp Official Store
+              </div>
+              <div class="store-info d-flex align-items-center gap-2">
+                <small>
+                  <span
+                    class="text-primary bg-primary-subtle rounded-2 px-1 opacity-75"
+                    style="font-size: 0.75rem"
+                    ><i class="fa-solid fa-circle-check"></i> Official</span
+                  >
+                </small>
+
+                <span class="seperator text-body-tertiary fw-light">|</span>
+                <div
+                  class="d-flex flex-column text-start"
+                  style="font-size: 0.9rem"
+                >
+                  <span class="text-secondary fw-medium">
+                    {{storeRating | number: 2}}
+                    <i class="fa-solid fa-star text-yellow"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div aria-label="info-second_block" class="bg-white rounded-2 p-3">
           <h5 class="text-secondary">Description</h5>
@@ -182,7 +264,7 @@
                   ng-class="{'active': $index == 0}"
                   ng-repeat="product_chunk in relatedProductsCarousel"
                 >
-                  <div class="row row-cols-2 row-cols-md-4 row-gap-2 gx-2">
+                  <div class="row row-cols-2 row-cols-lg-4 row-gap-2 gx-2">
                     <div class="col" ng-repeat="p in product_chunk">
                       <a
                         href="#!products/{{p.id}}"
@@ -303,7 +385,7 @@
               ng-repeat="product_chunk in suggestionCarousel"
             >
               <div
-                class="row row-cols-2 row-cols-md-3 row-cols-lg-6 row-gap-2 gx-2"
+                class="row row-cols-2 row-cols-sm-3 row-cols-lg-6 row-gap-2 g-3 g-lg-2"
               >
                 <div class="col" ng-repeat="p in product_chunk">
                   <a
@@ -410,7 +492,10 @@
     <!-- end major first col -->
   </div>
 
-  <div class="col-3 sticky-top h-fit-content" style="top: 1rem">
+  <div
+    class="col-3 sticky-top h-fit-content d-none d-xl-block"
+    style="top: 1rem"
+  >
     <!-- start second major col -->
     <div class="bg-white rounded-2 p-3">
       <div id="store">
