@@ -1,4 +1,8 @@
-export function CartCtrl($scope, $rootScope) {
+export function CartCtrl($scope, $rootScope, app, $loadingOff) {
   $rootScope.page = "cart";
-  console.log("I am Cart");
+
+  app
+    .init()
+    .then(function () {})
+    .then($loadingOff);
 }

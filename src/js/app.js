@@ -7,9 +7,14 @@ import { AuthCtrl } from "./controller/auth.ctrl.js";
 
 angular
   .module("App", ["ngRoute"])
-  .service("app", function ($rootScope, $http, $anchorScroll) {
+  .run(function ($rootScope) {
+    $rootScope.isLoading = true;
+  })
+  .service("app", function ($rootScope, $http, $anchorScroll, $loadingOn) {
     this.init = async function () {
       $anchorScroll();
+      $loadingOn();
+
       if (!$rootScope.isDataLoaded) {
         let activeUser = sessionStorage.getItem("activeUser");
         if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
@@ -36,6 +41,20 @@ angular
           $rootScope.isDataLoaded = true;
         });
       } else return Promise.resolve();
+    };
+  })
+  .factory("$loadingOn", function ($rootScope) {
+    return function () {
+      $rootScope.isLoading = true;
+    };
+  })
+  .factory("$loadingOff", function ($rootScope) {
+    return function () {
+      setTimeout(() => {
+        $rootScope.$apply(function () {
+          $rootScope.isLoading = false;
+        });
+      }, 600);
     };
   })
   .config(function ($routeProvider) {

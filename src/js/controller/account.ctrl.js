@@ -1,4 +1,7 @@
-export function AccountCtrl($scope, $rootScope) {
+export function AccountCtrl($scope, $rootScope, app, $loadingOff) {
   $rootScope.page = "account";
-  $scope.$on("dataLoaded", function () {});
+  app
+    .init()
+    .then(function () {})
+    .then($loadingOff);
 }
