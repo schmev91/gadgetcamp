@@ -19,6 +19,11 @@ export function ShopCtrl(
         if ($routeParams.category) {
           $scope.categorize[$routeParams.category] = true;
         }
+        $scope.sortOptions = [
+          { text: "Update time", value: "id" },
+          { text: "Price", value: "price" },
+          { text: "Rating", value: "rating" },
+        ];
 
         $scope.filteredProducts = $rootScope.products;
         $scope.productLimit = 20;
