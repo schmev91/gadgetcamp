@@ -12,7 +12,17 @@
     class="w-75 mx-auto border border-light-subtle py-2 rounded-3 px-lg-5 bg-white"
   >
     <div class="container">
-      <h2 class="text-center text-dark-emphasis py-2">REGISTER</h2>
+      <h2 class="text-center py-2">
+        <span
+          class="text-dark-emphasis"
+          ng-init="isRegistered = false"
+          ng-show="!isRegistered"
+          >REGISTER</span
+        >
+        <span class="text-success" ng-show="isRegistered"
+          >REGISTRATION SUCCESSFUL</span
+        >
+      </h2>
       <div
         class="row d-flex flex-column-reverse flex-lg-row align-items-center justify-content-center gy-5"
       >

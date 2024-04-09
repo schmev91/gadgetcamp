@@ -1,5 +1,12 @@
 import * as u from "../module/utility.js";
-export function AuthCtrl(app, $scope, $rootScope, $location, $loadingOff) {
+export function AuthCtrl(
+  app,
+  $scope,
+  $rootScope,
+  $location,
+  $loadingOff,
+  $timeout
+) {
   app
     .init()
     .then(function () {
@@ -21,8 +28,10 @@ export function AuthCtrl(app, $scope, $rootScope, $location, $loadingOff) {
           alert("Username exist");
         } else {
           u.addUser(userData);
-          alert("Register successful");
-          $location.path("auth/login");
+          $scope.isRegistered = true;
+          $timeout(function () {
+            $location.path("auth/login");
+          }, 2700);
         }
       };
 
