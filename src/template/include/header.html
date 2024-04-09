@@ -59,11 +59,13 @@
       <!-- SEARCH -->
       <div class="col-auto col-lg d-none d-lg-flex">
         <div class="flex-grow-1">
-          <form class="search d-flex">
+          <form name="search" ng-submit="toShop()" class="search d-flex">
             <input
               class="form-control border rounded-end-0 border-end-0"
               placeholder="What are we buying today?"
               type="text"
+              ng-model="searchKeywords"
+              ng-change="setKeywords(searchKeywords)"
             />
             <button class="btn border border-start-0 rounded-start-0 p-0 pe-2">
               <i class="fa-solid fa-magnifying-glass"></i>

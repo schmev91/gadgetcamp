@@ -1,7 +1,7 @@
 <div class="row gx-3">
   <aside
-    class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2 position-sticky overflow-y-scroll p-3"
-    style="max-height: 100vh; scrollbar-width: none; top: 1rem; z-index: 20"
+    class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2 position-sticky overflow-y-scroll p-3 h-fit-content"
+    style="scrollbar-width: none; top: 1rem; z-index: 20"
   >
     <div
       class="offcanvas offcanvas-start d-lg-block"
@@ -10,7 +10,7 @@
       aria-labelledby="categoryLabel"
     >
       <div class="offcanvas-header">
-        <p class="offcanvas-title fs-5" id="categoryLabel">Category</p>
+        <!-- <p class="offcanvas-title fs-5" id="categoryLabel">Category</p> -->
         <button
           type="button"
           class="btn-close"
@@ -18,7 +18,55 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="offcanvas-body">
+      <div class="offcanvas-body flex-column gap-3">
+        <div class="filter-price_range">
+          <label for="" class="text-dark-emphasis fw-medium">Price range</label>
+          <div
+            class="price_range-inputs text-secondary align-items-center d-flex gap-2"
+          >
+            <div class="d-flex">
+              <input
+                type="number"
+                style="width: 3.6rem"
+                class="form-control priceRange border-light-subtle pe-0 rounded-end-0 border-end-0 shadow-none"
+                ng-model="priceRange.from"
+                ng-change="shopFilter()"
+                placeholder="from"
+                ng-blur="priceRange.from = (priceRange.from < 1) ? null : priceRange.from"
+              />
+              <small
+                class="form-control text-secondary opacity-75 ps-0 pe-2 rounded-start-0 border-start-0"
+                >$</small
+              >
+            </div>
+            <span class="fs-5">-</span>
+            <div class="d-flex">
+              <input
+                type="number"
+                style="width: 3.6rem"
+                class="form-control priceRange border-light-subtle pe-0 rounded-end-0 border-end-0 shadow-none"
+                ng-model="priceRange.to"
+                ng-change="shopFilter()"
+                placeholder="to"
+                ng-blur="priceRange.to = (priceRange.to < 1) ? null : priceRange.to"
+              />
+              <small
+                class="form-control text-secondary opacity-75 ps-0 pe-2 rounded-start-0 border-start-0"
+                >$</small
+              >
+            </div>
+          </div>
+          <!-- <div class="text-center">
+            <button
+              class="btn py-0 w-75 mt-2"
+              ng-class="priceRange.from || priceRange.to ? 'btn-secondary' : 'btn-outline-secondary'"
+              ng-disabled="!(priceRange.from || priceRange.to)"
+              ng-click="shopFilter()"
+            >
+              <small>Apply</small>
+            </button>
+          </div> -->
+        </div>
         <div class="filter-category">
           <label class="text-dark-emphasis fw-medium">Category</label>
           <ul class="navbar-nav flex-column text-start" ng-if="categoryList">
@@ -29,7 +77,9 @@
               <input
                 id="checkbox-{{category}}"
                 type="checkbox"
+                ng-model="categorize[category]"
                 class="form-check"
+                ng-change="shopFilter()"
               />
               <label for="checkbox-{{category}}"
                 >{{(category.charAt(0).toUpperCase() +
@@ -65,7 +115,7 @@
       <div class="row m-0 row-cols-5 g-2">
         <div
           class="col"
-          ng-repeat="p in viewProducts | orderBy: '-id' | limitTo: 20:begin"
+          ng-repeat="p in filteredProducts = (filteredProducts | filter: shopFilter) | orderBy: '-id' | limitTo: 20:begin"
         >
           <a
             href="#!products/{{p.id}}"

@@ -7,8 +7,15 @@ import { AuthCtrl } from "./controller/auth.ctrl.js";
 
 angular
   .module("App", ["ngRoute"])
-  .run(function ($rootScope) {
-    $rootScope.isLoading = true;
+  .run(function ($rootScope, $location) {
+    $rootScope.toShop = function () {
+      $location.path("shop");
+    };
+    $rootScope.setKeywords = function (keywords) {
+      $rootScope.searchKeywords = keywords.toLowerCase();
+      if ($rootScope.page == "shop") $rootScope.shopFilter();
+    };
+    // $rootScope.isLoading = true;
   })
   .service("app", function ($rootScope, $http, $anchorScroll, $loadingOn) {
     this.init = async function () {
@@ -45,7 +52,7 @@ angular
   })
   .factory("$loadingOn", function ($rootScope) {
     return function () {
-      $rootScope.isLoading = true;
+      // $rootScope.isLoading = true;
     };
   })
   .factory("$loadingOff", function ($rootScope) {
