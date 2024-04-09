@@ -1,6 +1,6 @@
 <div class="row gx-3">
   <aside
-    class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2 position-sticky overflow-y-scroll p-3 h-fit-content"
+    class="navbar p-0 navbar-expand-lg flex-column align-items-start col-lg-auto bg-white rounded-2 position-sticky overflow-y-scroll p-lg-3 h-fit-content"
     style="scrollbar-width: none; top: 1rem; z-index: 20"
   >
     <div
@@ -101,8 +101,8 @@
     data-bs-target="#category"
     aria-controls="category"
   >
-    <i class="fs-5 fa-solid fa-layer-group"></i>
-    <span class="d-none d-md-block fw-medium">CATEGORY</span>
+    <i class="fa-solid fa-filter"></i>
+    <span class="d-none d-md-block fw-medium">FILTER</span>
     <i class="d-block d-md-none fa-solid fa-caret-right"></i>
   </button>
 
@@ -154,8 +154,9 @@
         </button>
       </div>
     </div>
+
     <div class="rounded-2 mt-2">
-      <div class="row m-0 row-cols-5 g-2">
+      <div class="row row-cols-2 row-cols-md-4 row-cols-xl-5 g-2">
         <div
           class="col"
           ng-repeat="p in filteredProducts = (filteredProducts | filter: shopFilter) | orderBy: sortOrder + sortBy | limitTo: 20:begin"

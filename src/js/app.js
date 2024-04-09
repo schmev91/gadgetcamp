@@ -15,7 +15,7 @@ angular
       $rootScope.searchKeywords = keywords.toLowerCase();
       if ($rootScope.page == "shop") $rootScope.shopFilter();
     };
-    // $rootScope.isLoading = true;
+    $rootScope.isLoading = true;
   })
   .service("app", function ($rootScope, $http, $anchorScroll, $loadingOn) {
     this.init = async function () {
@@ -52,7 +52,7 @@ angular
   })
   .factory("$loadingOn", function ($rootScope) {
     return function () {
-      // $rootScope.isLoading = true;
+      $rootScope.isLoading = true;
     };
   })
   .factory("$loadingOff", function ($rootScope) {

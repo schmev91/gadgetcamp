@@ -160,6 +160,8 @@
           type="text"
           class="form-control"
           placeholder="What are we buying today?"
+          ng-model="searchKeywords"
+          ng-change="setKeywords(searchKeywords)"
         />
       </div>
     </div>
