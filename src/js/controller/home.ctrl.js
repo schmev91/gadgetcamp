@@ -1,5 +1,12 @@
 import { shuffleArray } from "../module/utility.js";
-export function HomeCtrl($scope, $rootScope, $interval, app, $loadingOff) {
+export function HomeCtrl(
+  $scope,
+  $rootScope,
+  $interval,
+  app,
+  $loadingOff,
+  getBestRated
+) {
   $rootScope.page = "home";
 
   app
@@ -15,12 +22,10 @@ export function HomeCtrl($scope, $rootScope, $interval, app, $loadingOff) {
       }
 
       //load best rated products
-      $scope.bestRatedProducts = [];
-      const prodSortByRating = $rootScope.products.sort(
-        (p1, p2) => p2.rating - p1.rating
-      );
+      $scope.bestRatedProductsCarousel = [];
+      const prodSortByRating = getBestRated();
       for (let i = 0; i < 3; i++) {
-        $scope.bestRatedProducts.push(
+        $scope.bestRatedProductsCarousel.push(
           prodSortByRating.slice(i * 5, (i + 1) * 5)
         );
       }

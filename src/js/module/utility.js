@@ -58,3 +58,12 @@ export function shuffleArray(array, length) {
   }
   return shuffledArray.slice(0, length); // Return a new array with specified length
 }
+
+export function getSuggestionsCarousel(products, amount, page) {
+  let suggestionProducts = shuffleArray(products, amount * page),
+    carousel = [];
+  suggestionProducts.forEach((p) => {
+    carousel.push(suggestionProducts.splice(0, amount));
+  });
+  return carousel;
+}

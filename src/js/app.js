@@ -64,6 +64,11 @@ angular
       }, 600);
     };
   })
+  .service("getBestRated", function ($rootScope) {
+    return function () {
+      return $rootScope.products.sort((p1, p2) => p2.rating - p1.rating);
+    };
+  })
   .config(function ($routeProvider) {
     $routeProvider
       .when("/home", {

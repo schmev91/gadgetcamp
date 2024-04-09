@@ -1,4 +1,4 @@
-import { shuffleArray } from "../module/utility.js";
+import { getSuggestionsCarousel } from "../module/utility.js";
 
 export function ProductCtrl(
   $scope,
@@ -39,18 +39,11 @@ export function ProductCtrl(
             $scope.relatedProductsCarousel.push(relatedProducts.splice(0, 4));
         });
 
-        let suggestionProd_amount = 6,
-          suggestionProd_page = 4,
-          suggestionProducts = shuffleArray(
-            $rootScope.products.filter(({ id }) => id != $scope.p.id),
-            suggestionProd_amount * suggestionProd_page
-          );
-        $scope.suggestionCarousel = [];
-        suggestionProducts.forEach((p) => {
-          $scope.suggestionCarousel.push(
-            suggestionProducts.splice(0, suggestionProd_amount)
-          );
-        });
+        $scope.suggestionCarousel = getSuggestionsCarousel(
+          $rootScope.products,
+          6,
+          4
+        );
 
         //end apply
       });
