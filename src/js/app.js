@@ -74,6 +74,10 @@ angular
         templateUrl: "./src/template/shop.html",
         controller: "ShopController",
       })
+      .when("/shop/category/:category", {
+        templateUrl: "./src/template/shop.html",
+        controller: "ShopController",
+      })
       .when("/products/:id", {
         templateUrl: "./src/template/product.html",
         controller: "ProductController",

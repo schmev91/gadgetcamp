@@ -1,4 +1,11 @@
-export function ShopCtrl(app, $scope, $rootScope, $anchorScroll, $loadingOff) {
+export function ShopCtrl(
+  app,
+  $scope,
+  $rootScope,
+  $routeParams,
+  $anchorScroll,
+  $loadingOff
+) {
   $rootScope.page = "shop";
 
   app
@@ -9,6 +16,9 @@ export function ShopCtrl(app, $scope, $rootScope, $anchorScroll, $loadingOff) {
         $rootScope.categoryList.forEach((category) => {
           $scope.categorize[category] = false;
         });
+        if ($routeParams.category) {
+          $scope.categorize[$routeParams.category] = true;
+        }
 
         $scope.filteredProducts = $rootScope.products;
         $scope.productLimit = 20;
