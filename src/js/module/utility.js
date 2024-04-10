@@ -1,4 +1,4 @@
-function getUserlist() {
+function getUserList() {
   let userList = sessionStorage.getItem("userList");
   if (!userList) userList = [];
   else userList = JSON.parse(userList);
@@ -10,14 +10,14 @@ function saveUserlist(newUserlist) {
 }
 
 export function addUser(userData) {
-  let userList = getUserlist();
+  let userList = getUserList();
   userList.push(new user(...Object.values(userData)));
 
   saveUserlist(userList);
 }
 
 export function getUser(searching_username) {
-  let userList = getUserlist();
+  let userList = getUserList();
 
   return userList.find(({ username }) => username == searching_username);
 }

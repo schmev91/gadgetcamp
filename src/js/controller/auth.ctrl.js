@@ -46,6 +46,7 @@ export function AuthCtrl(
                   JSON.stringify(loginResult)
                 );
               $rootScope.activeUser = loginResult;
+
               $location.path("/home");
             })
             .catch(function () {

@@ -1,9 +1,11 @@
+import { addItem } from "../module/cart.methods.js";
 import { getSuggestionsCarousel } from "../module/utility.js";
 
 export function ProductCtrl(
   $scope,
   $rootScope,
   $routeParams,
+  $location,
   app,
   $loadingOff
 ) {
@@ -27,7 +29,7 @@ export function ProductCtrl(
             }
           }, 0) / ratedProductCount;
 
-        //load related products
+        // related products
         let relatedProducts = $rootScope.products.filter(
           ({ id, category }) =>
             $scope.p.id != id && $scope.p.category == category
@@ -38,7 +40,7 @@ export function ProductCtrl(
           if (index % 4 == 0)
             $scope.relatedProductsCarousel.push(relatedProducts.splice(0, 4));
         });
-
+        // suggestion carousel
         $scope.suggestionCarousel = getSuggestionsCarousel(
           $rootScope.products,
           6,
@@ -55,5 +57,11 @@ export function ProductCtrl(
   };
   $scope.amountDown = function () {
     if ($scope.productAmount > 1) $scope.productAmount--;
+  };
+  $scope.addToCart = function (id, quantity) {
+    const { activeUser } = $rootScope;
+    if (activeUser) {
+      addItem(activeUser.username, id, quantity);
+    } else $location.path("auth/login");
   };
 }

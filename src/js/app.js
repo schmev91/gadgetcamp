@@ -1,3 +1,4 @@
+import * as u from "./module/utility.js";
 import { HomeCtrl } from "./controller/home.ctrl.js";
 import { AccountCtrl } from "./controller/account.ctrl.js";
 import { CartCtrl } from "./controller/cart.ctrl.js";
@@ -8,6 +9,7 @@ import { AuthCtrl } from "./controller/auth.ctrl.js";
 angular
   .module("App", ["ngRoute"])
   .run(function ($rootScope, $location) {
+    $rootScope.isLoading = true;
     $rootScope.toShop = function () {
       $location.path("shop");
     };
@@ -15,7 +17,8 @@ angular
       $rootScope.searchKeywords = keywords.toLowerCase();
       if ($rootScope.page == "shop") $rootScope.shopFilter();
     };
-    $rootScope.isLoading = true;
+
+    $rootScope.cartList = [];
   })
   .service("app", function ($rootScope, $http, $anchorScroll, $loadingOn) {
     this.init = async function () {

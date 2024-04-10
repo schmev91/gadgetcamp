@@ -1,10 +1,13 @@
 <div class="d-flex flex-column gap-4">
   <div class="cart-container">
     <label class="fs-3 text-dark-emphasis fw-medium">Cart</label>
-    <div id="cart" class="bg-white p-3 rounded-2 mt-3">
+    <div id="cart" class="">
       <!-- start cart -->
       <!-- display when no item in cart -->
-      <div class="cart-no_item text-center">
+      <div
+        class="cart-no_item text-center bg-white p-3 rounded-2"
+        ng-show="!cartItems || !cartItems.length"
+      >
         <div class="cart-image p-3 w-75 mx-auto">
           <img src="./src/img/cart-img.png" class="w-25" alt="" />
         </div>
@@ -13,6 +16,193 @@
           Feel free to browse more or take a look at our suggestions below!
         </p>
       </div>
+
+      <!-- display when there is item in cart -->
+      <div class="row gap-3" ng-show="cartItems && cartItems.length">
+        <div class="col bg-white rounded-2">
+          <table class="table table-borderless p-0 align-middle text-center">
+            <tr>
+              <th class="fw-normal text-secondary d-flex justify-content-end">
+                <input
+                  type="checkbox"
+                  ng-model="isCheckAll"
+                  class="form-check-input border-secondary-subtle"
+                />
+              </th>
+              <th class="fw-normal text-secondary text-start">All</th>
+              <th class="fw-normal text-secondary">Price</th>
+              <th class="fw-normal text-secondary">Quantity</th>
+              <th class="fw-normal text-secondary">Total</th>
+              <th class="fw-normal text-secondary">
+                <i class="fa-solid fa-trash text-secondary"></i>
+              </th>
+            </tr>
+            <tr ng-repeat="item in cartItems">
+              <td class="">
+                <div
+                  class="d-flex flex-column justify-content-center align-items-end"
+                  style="height: 5rem"
+                >
+                  <input
+                    type="checkbox"
+                    ng-model="cartItems[$index].checked"
+                    ng-checked="isCheckAll || cartItems[$index].checked"
+                    class="itemCheckbox form-check-input border-secondary-subtle"
+                  />
+                </div>
+              </td>
+              <td class="">
+                <a
+                  href="#!products/{{item.id}}"
+                  class="d-flex align-items-center gap-3 text-decoration-none"
+                >
+                  <div class="item-img">
+                    <img
+                      src="{{item.thumbnail}}"
+                      class="rounded-2"
+                      maintain-ratio
+                      style="width: 5rem; object-fit: cover"
+                      alt=""
+                    />
+                  </div>
+                  <div
+                    class="item-info d-flex flex-column h-100 w-fit-content text-start d-none d-md-block"
+                  >
+                    <div class="text-dark-emphasis fw-medium mb-1">
+                      {{item.title}}
+                    </div>
+                    <small
+                      class="text-primary bg-primary-subtle rounded-3 px-1 w-fit-content"
+                      style="font-size: 0.7rem"
+                    >
+                      <i class="fa-solid fa-circle-check"></i>{{item.brand}}
+                    </small>
+                    <small class="text-secondary pt-3"
+                      >Stock: {{item.stock}}
+                    </small>
+                  </div>
+                </a>
+              </td>
+              <td class="text-danger-emphasis">
+                {{item.price - item.price * item.discountPercentage /100 |
+                number: 2}}<sup>$</sup>
+              </td>
+              <td>
+                <div class="product-amount">
+                  <div
+                    class="d-flex gap-1 text-secondary justify-content-center"
+                  >
+                    <button
+                      ng-click="amountDown($index)"
+                      class="btn btn-sm border border-secondary px-1 px-sm-2"
+                      ng-class="{'opacity-25': cartItems[$index].quantity < 2}"
+                    >
+                      <i class="fa-solid fa-minus"></i>
+                    </button>
+                    <input
+                      id="product-amount"
+                      class="form-control form-control-sm rounded-2 fw-medium text-center border-secondary"
+                      style="width: 2.8rem"
+                      ng-model="quantityCollection[$index]"
+                      ng-blur="
+                      quantityCollection[$index] = (quantityCollection[$index] < 1 
+                      || quantityCollection[$index] > cartItems[$index].stock) 
+                      ? 1 : quantityCollection[$index]"
+                      type="number"
+                    />
+                    <button
+                      class="btn btn-sm border border-secondary px-1 px-sm-2"
+                      ng-click="amountUp($index)"
+                    >
+                      <i class="fa-solid fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </td>
+              <td class="text-dark-emphasis">
+                {{(item.price - item.price * item.discountPercentage /100) *
+                cartItems[$index].quantity | number: 2}}<sup>$</sup>
+              </td>
+              <td>
+                <i
+                  class="fa-solid fa-trash text-danger"
+                  ng-click="deleteItem(activeUser.username, item.id)"
+                  style="cursor: pointer"
+                ></i>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="side-board col-12 col-lg-3 p-0">
+          <div
+            class="board-content rounded-bottom-2 bg-white p-3 border-3 border-top border-sub"
+          >
+            <!-- START BOARD CONTENT -->
+            <h5 class="text-dark-emphasis">Billing</h5>
+            <hr class="text-secondary" />
+            <div class="d-flex justify-content-between">
+              <span class="text-secondary">Total:</span>
+              <h3 class="text-dark-emphasis">
+                {{getTotalBilling() | number: 2}}<sup>$</sup>
+              </h3>
+            </div>
+            <!-- END BOARD CONTENT -->
+          </div>
+
+          <div class="order-btn mt-3">
+            <button class="btn w-100 fw-bold text-white bg-accent">
+              ORDER NOW
+            </button>
+          </div>
+
+          <!-- BANNER -->
+          <section
+            id="banner-container"
+            class="rounded-2 d-none d-md-block mt-3"
+          >
+            <div id="banner" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div
+                  class="carousel-item"
+                  ng-class="{'active':banner.active}"
+                  ng-repeat="banner in banners"
+                >
+                  <a href="{{banner.link}}">
+                    <img
+                      src="{{banner.image}}"
+                      class="d-block w-100 object-fit-cover rounded-2"
+                    />
+                  </a>
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#banner"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#banner"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </section>
+        </div>
+      </div>
       <!-- end cart -->
     </div>
   </div>
@@ -20,7 +210,7 @@
   <!-- BEST-RATE  -->
   <section
     id="best_rated-container"
-    class="rounded-2 p-2 p-lg-3"
+    class="rounded-2 p-2 p-lg-3 row"
     style="background: linear-gradient(to bottom, #cfe2ff, white)"
   >
     <div class="d-flex align-items-center gap-2 mb-1">
@@ -145,9 +335,10 @@
     </div>
   </section>
 
+  <!-- SUGGESTION  -->
   <div
     aria-label="first major col second block"
-    class="bg-white rounded-2 p-3 mt-3"
+    class="bg-white rounded-2 p-3 mt-3 row"
   >
     <section>
       <div class="d-flex align-items-center gap-2 mb-1">
