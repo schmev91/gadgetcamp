@@ -18,7 +18,12 @@ angular
       if ($rootScope.page == "shop") $rootScope.shopFilter();
     };
 
-    $rootScope.cartList = [];
+    u.addUser({
+      username: "saito",
+      email: "saito@hogwarts.edu.us",
+      password: "123",
+      isAdmin: true,
+    });
   })
   .service("app", function ($rootScope, $http, $anchorScroll, $loadingOn) {
     this.init = async function () {

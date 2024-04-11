@@ -7,6 +7,7 @@ export function CartCtrl(
   $http,
   app,
   $loadingOff,
+  $location,
   getBestRated
 ) {
   $rootScope.page = "cart";
@@ -42,7 +43,7 @@ export function CartCtrl(
               }
             });
           });
-        }
+        } else $location.path("auth/login");
 
         //load best rated products
         $scope.bestRatedProductsCarousel = [];

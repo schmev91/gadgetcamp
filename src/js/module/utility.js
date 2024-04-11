@@ -10,10 +10,16 @@ function saveUserlist(newUserlist) {
 }
 
 export function addUser(userData) {
-  let userList = getUserList();
-  userList.push(new user(...Object.values(userData)));
+  let userList = getUserList(),
+    isUserExist = userList.find(
+      ({ username }) => userData.username == username
+    );
 
-  saveUserlist(userList);
+  if (!isUserExist) {
+    userList.push(new user(...Object.values(userData)));
+
+    saveUserlist(userList);
+  }
 }
 
 export function getUser(searching_username) {
@@ -42,11 +48,12 @@ export function isEmpty(obj) {
   return true;
 }
 
-function user(username, email, password) {
+function user(username, email, password, isAdmin = null) {
   return {
     username,
     email,
     password,
+    isAdmin,
   };
 }
 
