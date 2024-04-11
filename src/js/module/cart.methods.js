@@ -6,7 +6,6 @@ function saveCarts(carts) {
 }
 export function getUserCart(username) {
   const carts = getCarts();
-  console.log(carts);
   return carts.find((cart) => cart.username === username);
 }
 

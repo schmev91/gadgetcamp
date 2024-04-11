@@ -15,9 +15,9 @@
   <!-- END HEADER -->
 
   <!-- START MAIN -->
-  <main class="container-fluid mt-3">
+  <main class="mt-3">
     <div class="container">
-      <div class="row gap-3">
+      <div class="row gap-3 justify-content-center">
         <aside
           class="navbar navbar-expand-lg flex-column align-items-start col-auto bg-wall rounded-2 position-sticky overflow-y-scroll h-fit-content"
           style="scrollbar-width: none; top: 1rem; z-index: 20"
@@ -88,7 +88,7 @@
         <div class="col">
           <!-- START SECOND COL -->
           <div
-            class="bg-white rounded-2 p-2 d-flex justify-content-between align-items-center"
+            class="bg-white rounded-2 p-0 p-md-2 d-flex justify-content-between align-items-center"
           >
             <form name="search" class="search d-flex">
               <input
@@ -145,21 +145,31 @@
 
                 <table class="table table-borderless align-middle">
                   <tr>
-                    <th class="fw-medium">Id</th>
-                    <th class="fw-medium">Username</th>
-                    <th class="fw-medium">Email</th>
-                    <th class="fw-medium">Password</th>
-                    <th class="fw-medium">Actions</th>
+                    <th class="fw-medium">
+                      <div class="text-wrap text-break">Id</div>
+                    </th>
+                    <th class="fw-medium">
+                      <div class="text-wrap text-break">Username</div>
+                    </th>
+                    <th class="fw-medium">
+                      <div class="text-wrap text-break">Email</div>
+                    </th>
+                    <th class="fw-medium">
+                      <div class="text-wrap text-break">Password</div>
+                    </th>
+                    <th class="fw-medium">
+                      <div class="text-wrap text-break">Actions</div>
+                    </th>
                   </tr>
                   <tr
                     ng-repeat="u in usersList | filter: searchText | limitTo: 20"
                   >
                     <td>{{$index}}</td>
-                    <td>{{u.username}}</td>
-                    <td>{{u.email}}</td>
-                    <td>{{u.password}}</td>
+                    <td><div class="text-break">{{u.username}}</div></td>
+                    <td><div class="text-break">{{u.email}}</div></td>
+                    <td><div class="text-break">{{u.password}}</div></td>
                     <td>
-                      <div class="d-flex gap-2">
+                      <div class="d-flex flex-column flex-lg-row gap-2">
                         <button
                           class="btn btn-sm btn-primary"
                           ng-click="openUpdateUser($index)"
@@ -246,11 +256,11 @@
                         />
                       </div>
                     </td>
-                    <td>{{p.title}}</td>
+                    <td class="line-clamp-2">{{p.title}}</td>
                     <td>{{p.price}}<sup>$</sup></td>
                     <td>{{p.discountPercentage}}<sup>%</sup></td>
                     <td>
-                      <div class="d-flex gap-2">
+                      <div class="d-flex flex-column flex-lg-row gap-2">
                         <button
                           class="btn btn-sm btn-primary"
                           data-bs-toggle="modal"

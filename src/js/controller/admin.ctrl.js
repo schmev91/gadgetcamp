@@ -87,7 +87,7 @@ export function AdminCtrl($scope, $rootScope, app, $loadingOff, $location) {
         pData.id = $rootScope.products.length;
         $rootScope.products.push(pData);
       });
-    } else console.log("fail");
+    } else console.log("you have to upload the image my little chick");
   };
   $scope.deleteProduct = function (index) {
     let products = getProducts().filter((p) => p.id != index);
