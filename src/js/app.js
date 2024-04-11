@@ -5,6 +5,7 @@ import { CartCtrl } from "./controller/cart.ctrl.js";
 import { ShopCtrl } from "./controller/shop.ctrl.js";
 import { ProductCtrl } from "./controller/product.ctrl.js";
 import { AuthCtrl } from "./controller/auth.ctrl.js";
+import { AdminCtrl } from "./controller/admin.ctrl.js";
 
 angular
   .module("App", ["ngRoute"])
@@ -79,6 +80,10 @@ angular
   })
   .config(function ($routeProvider) {
     $routeProvider
+      .when("/admin", {
+        templateUrl: "./src/template/admin.html",
+        controller: "AdminController",
+      })
       .when("/home", {
         templateUrl: "./src/template/home.html",
         controller: "HomeController",
@@ -123,6 +128,7 @@ angular
         redirectTo: "/home",
       });
   })
+  .controller("AdminController", AdminCtrl)
   .controller("HomeController", HomeCtrl)
   .controller("ShopController", ShopCtrl)
   .controller("ProductController", ProductCtrl)
