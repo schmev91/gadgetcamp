@@ -58,7 +58,10 @@
       { path: "src/js/module/bootstrap.bundle.min.js" },
     ];
 
-    scriptCollection.forEach((s) => {
+    // Function to load scripts sequentially
+    function loadScript(index) {
+      if (index >= scriptCollection.length) return; // Stop if all scripts are loaded
+      let s = scriptCollection[index];
       // Create a new script element
       let script = document.createElement("script");
       script.src =
@@ -68,8 +71,16 @@
       if (s.isModule) script.type = "module";
       // Append the script to the document body
       document.body.appendChild(script);
-    });
+      // Load the next script after the current one is loaded
+      script.onload = function () {
+        loadScript(index + 1);
+      };
+    }
+
+    // Start loading scripts
+    loadScript(0);
   </script>
+
   <!-- <script src="./src/js/module/angular.min.js"></script>
   <script src="./src/js/module/angular-route.min.js"></script>
   <script src="./src/js/loading.js"></script>
