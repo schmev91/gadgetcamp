@@ -13,7 +13,8 @@ import {
 export function AdminCtrl($scope, $rootScope, app, $loadingOff, $location) {
   $rootScope.page = "admin";
 
-  if ($location.path() == "/admin") $location.path("/home");
+  if (!$rootScope.activeUser && !$rootScope.activeUser.isAdmin)
+    $location.path("/home");
 
   app
     .init()
