@@ -17,7 +17,11 @@
     <!-- <base href="/" /> -->
   </head>
 
-  <body ng-app="App" class="bg-wall position-relative overflow-x-hidden">
+  <body
+    ng-app="App"
+    class="bg-wall position-relative overflow-x-hidden"
+    ng-class="{'bg-admin': page == 'admin'}"
+  >
     <!-- HEADER -->
     <ng-container
       ng-show="page != 'admin'"
@@ -31,7 +35,12 @@
       style="min-height: 18rem"
     ></div>
 
-    <div id="loading" ng-show="isLoading" class="bg-wall">
+    <div
+      id="loading"
+      ng-show="isLoading"
+      class="bg-wall"
+      ng-class="{'fullscreen':page == 'admin'}"
+    >
       <div><shape></shape><shape></shape><shape></shape></div>
     </div>
 

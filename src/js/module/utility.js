@@ -1,10 +1,11 @@
-function getUserList() {
+export function getUserList() {
   let userList = sessionStorage.getItem("userList");
   if (!userList) userList = [];
   else userList = JSON.parse(userList);
 
   return userList;
 }
+
 function saveUserlist(newUserlist) {
   sessionStorage.setItem("userList", JSON.stringify(newUserlist));
 }
@@ -20,6 +21,26 @@ export function addUser(userData) {
 
     saveUserlist(userList);
   }
+}
+export function updateUser(username, updatedUserData) {
+  let userList = getUserList();
+  let userIndex = userList.findIndex((user) => user.username === username);
+
+  if (userIndex !== -1) {
+    // Update the user data
+    userList[userIndex] = updatedUserData;
+
+    // Save the updated user list
+    saveUserlist(userList);
+    return true; // Return true to indicate success
+  }
+
+  return false; // Return false if the user was not found
+}
+export function deleteUser(index) {
+  let userList = getUserList().filter((u, i) => i != index);
+
+  saveUserlist(userList);
 }
 
 export function getUser(searching_username) {
@@ -73,4 +94,33 @@ export function getSuggestionsCarousel(products, amount, page) {
     carousel.push(suggestionProducts.splice(0, amount));
   });
   return carousel;
+}
+
+export function getProducts() {
+  let products = sessionStorage.getItem("products");
+  if (!products) products = [];
+  else products = JSON.parse(products);
+
+  return products;
+}
+
+export function saveProducts(newProducts) {
+  sessionStorage.setItem("products", JSON.stringify(newProducts));
+}
+
+export function addProduct(data) {
+  let products = getProducts();
+  products.push({
+    id: products.length,
+    ...data,
+  });
+  saveProducts(products);
+}
+
+export function fileToBase64(file, callback) {
+  var reader = new FileReader();
+  reader.onload = function (event) {
+    callback(event.target.result);
+  };
+  reader.readAsDataURL(file);
 }

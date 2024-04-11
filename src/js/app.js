@@ -10,6 +10,7 @@ import { AdminCtrl } from "./controller/admin.ctrl.js";
 angular
   .module("App", ["ngRoute"])
   .run(function ($rootScope, $location) {
+    //escape to turn off loading
     $rootScope.isLoading = true;
     $rootScope.toShop = function () {
       $location.path("shop");
@@ -29,33 +30,45 @@ angular
   .service("app", function ($rootScope, $http, $anchorScroll, $loadingOn) {
     this.init = async function () {
       $anchorScroll();
+      //escape to turn off loading
       $loadingOn();
 
       if (!$rootScope.isDataLoaded) {
-        let activeUser = sessionStorage.getItem("activeUser");
+        let activeUser = sessionStorage.getItem("activeUser"),
+          requiredData = [
+            {
+              name: "products",
+              url: "https://dummyjson.com/products?limit=100",
+            },
+            {
+              name: "categoryList",
+              url: "https://dummyjson.com/products/categories",
+            },
+            {
+              name: "banners",
+              url: "./src/json/home.banners.json",
+            },
+          ];
+
         if (activeUser) $rootScope.activeUser = JSON.parse(activeUser);
 
-        const [
-          { data: productsData },
-          { data: categoriesData },
-          { data: bannersData },
-        ] = await Promise.all([
-          $http.get("https://dummyjson.com/products?limit=100", {
-            cache: true,
-          }),
-          $http.get("https://dummyjson.com/products/categories", {
-            cache: true,
-          }),
-          $http.get("./src/json/home.banners.json", {
-            cache: true,
-          }),
-        ]);
-        $rootScope.$apply(function () {
-          $rootScope.products = productsData.products;
-          $rootScope.categoryList = categoriesData;
-          $rootScope.banners = bannersData;
-          $rootScope.isDataLoaded = true;
-        });
+        await Promise.all(
+          requiredData.map(async ({ name, url }) => {
+            let fetchedData = sessionStorage.getItem(name);
+            if (!fetchedData) {
+              await $http.get(url, { cache: true }).then(({ data }) => {
+                if (name == "products") fetchedData = data.products;
+                else fetchedData = data;
+                sessionStorage.setItem(name, JSON.stringify(fetchedData));
+              });
+            } else {
+              fetchedData = JSON.parse(fetchedData);
+            }
+            $rootScope[name] = fetchedData;
+          })
+        );
+
+        $rootScope.isDataLoaded = true;
       } else return Promise.resolve();
     };
   })

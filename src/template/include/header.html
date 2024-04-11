@@ -31,6 +31,13 @@
         href="#!auth/login"
         >Login</a
       >
+
+      <a
+        class="text-secondary-emphasis text-decoration-none fw-medium hover-underline"
+        ng-show="activeUser && activeUser.isAdmin"
+        href="#!/admin"
+        ><i class="fa-solid fa-hammer"></i> Administrator</a
+      >
       <span class="text-secondary-emphasis fw-medium me-3" ng-show="activeUser"
         >Hello {{activeUser.username}}!</span
       >

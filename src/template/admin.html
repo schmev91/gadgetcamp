@@ -1,1 +1,641 @@
-<h1>I am the Administrator</h1>
+<div>
+  <!-- START HEADER -->
+  <header id="admin-header" class="container-fluid bg-dark">
+    <div class="container d-flex align-items-center py-3">
+      <a href="#!home" class="logo-container d-flex align-items-center">
+        <img
+          src="./src/img/gadgetcamp_white.png"
+          class="object-fit-contain"
+          alt=""
+          style="width: 10rem"
+        />
+      </a>
+    </div>
+  </header>
+  <!-- END HEADER -->
+
+  <!-- START MAIN -->
+  <main class="container-fluid mt-3">
+    <div class="container">
+      <div class="row gap-3">
+        <aside
+          class="navbar navbar-expand-lg flex-column align-items-start col-auto bg-wall rounded-2 position-sticky overflow-y-scroll h-fit-content"
+          style="scrollbar-width: none; top: 1rem; z-index: 20"
+        >
+          <div
+            class="offcanvas offcanvas-start d-lg-block"
+            tabindex="-1"
+            id="category"
+            aria-labelledby="categoryLabel"
+          >
+            <div class="offcanvas-header">
+              <!-- <p class="offcanvas-title fs-5" id="categoryLabel">Category</p> -->
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="offcanvas-body flex-column">
+              <ul
+                class="admin-tabs nav nav-pills flex-column gap-2 text-secondary"
+                id="myTab"
+                role="tablist"
+              >
+                <li
+                  class="nav-item"
+                  role="presentation"
+                  ng-repeat="tab in tablesData"
+                >
+                  <button
+                    class="btn tab-btn d-flex gap-1 h-100 p-3 w-100 border-0 border-start rounded-0 border-4 border-secondary-subtle"
+                    ng-class="{'active': $index == 0}"
+                    ng-click="resetBegin()"
+                    id="{{tab.name}}-btn"
+                    type="button"
+                    role="tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#{{tab.name}}"
+                    aria-controls="{{tab.name}}"
+                    aria-selected="{{$index == 0 ? 'true' : 'false'}}"
+                  >
+                    <i
+                      class="text-secondary fa-solid {{tab.icon.class}} fs-4"
+                    ></i>
+                    <small class="text-secondary">{{tab.text}}</small>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+        <!-- MOBILE CATEGORY -->
+        <button
+          class="d-lg-none position-fixed start-0 btn rounded-end-5 py-2 px-1 bg-sub text-white d-flex align-items-center gap-1 w-fit-content"
+          style="z-index: 10"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#category"
+          aria-controls="category"
+        >
+          <i class="fa-solid fa-filter"></i>
+          <span class="d-none d-md-block fw-medium">TABLE</span>
+          <i class="d-block d-md-none fa-solid fa-caret-right"></i>
+        </button>
+
+        <div class="col">
+          <!-- START SECOND COL -->
+          <div
+            class="bg-white rounded-2 p-2 d-flex justify-content-between align-items-center"
+          >
+            <form name="search" class="search d-flex">
+              <input
+                class="form-control-sm border rounded-end-0 border-end-0 w-100"
+                placeholder="Enter keywords"
+                style="max-width: 21rem"
+                ng-model="searchText"
+                type="text"
+              />
+              <button
+                class="btn border border-start-0 rounded-start-0 p-0 pe-2"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+
+            <div class="top-paginating">
+              <button
+                class="btn fs-4 fw-medium border-0"
+                ng-click="paginating(begin - 20)"
+                ng-class="{'text-secondary text-opacity-50': !begin}"
+                ng-disabled="!begin"
+              >
+                <i class="fa-solid fa-angle-left"></i>
+              </button>
+              <button
+                class="btn fs-4 fw-medium border-0"
+                ng-class="{'text-secondary text-opacity-50': begin == (pageCount - 1) * 20 }"
+                ng-click="paginating(begin + 20)"
+                ng-disabled="begin == (pageCount - 1) * 20 "
+              >
+                <i class="fa-solid fa-angle-right"></i>
+              </button>
+            </div>
+          </div>
+          <div class="table-container mt-2 p-2 bg-white rounded-2">
+            <div class="tab-content mt-2" id="myTabContent">
+              <!-- START TAB-CONTENT -->
+              <div
+                class="tab-pane fade show active"
+                id="tab-users"
+                role="tabpanel"
+                tabindex="0"
+              >
+                <!--users table  -->
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addUserModal"
+                >
+                  <i class="fa-solid fa-plus"></i> add
+                </button>
+
+                <table class="table table-borderless align-middle">
+                  <tr>
+                    <th class="fw-medium">Id</th>
+                    <th class="fw-medium">Username</th>
+                    <th class="fw-medium">Email</th>
+                    <th class="fw-medium">Password</th>
+                    <th class="fw-medium">Actions</th>
+                  </tr>
+                  <tr
+                    ng-repeat="u in usersList | filter: searchText | limitTo: 20"
+                  >
+                    <td>{{$index}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.email}}</td>
+                    <td>{{u.password}}</td>
+                    <td>
+                      <div class="d-flex gap-2">
+                        <button
+                          class="btn btn-sm btn-primary"
+                          ng-click="openUpdateUser($index)"
+                          data-bs-toggle="modal"
+                          data-bs-target="#updateUserModal"
+                        >
+                          Update
+                        </button>
+                        <button
+                          class="btn btn-sm btn-danger"
+                          ng-click="deleteUser($index)"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="tab-products"
+                role="tabpanel"
+                tabindex="0"
+              >
+                <!-- products table -->
+                <div class="table-header d-flex align-items-center gap-2">
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addProductModal"
+                  >
+                    <i class="fa-solid fa-plus"></i> add
+                  </button>
+                  <div class="d-flex flex-column flex-md-row gap-2 gap-md-4">
+                    <div class="">
+                      <label for="productSortBy" class="fw-medium"
+                        >Sort by</label
+                      >
+                      <select
+                        class="form-select-sm w-fit-content border-secondary-subtle ps-1"
+                        id="productSortBy"
+                        ng-model="productSortBy"
+                        ng-init="productSortBy = 'id'"
+                        ng-options="option.value as option.text for option in sortOptions"
+                      ></select>
+                    </div>
+                    <div class="">
+                      <label for="productSortOrder" class="fw-medium"
+                        >Order</label
+                      >
+                      <select
+                        class="form-select-sm w-fit-content border-secondary-subtle ps-1"
+                        id="productSortOrder"
+                        ng-init="productSortOrder = '-'"
+                        ng-model="productSortOrder"
+                      >
+                        <option value="-">Descending</option>
+                        <option value="">Ascending</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-borderless align-middle">
+                  <tr>
+                    <th class="fw-medium">Image</th>
+                    <th class="fw-medium">Title</th>
+                    <th class="fw-medium">Price</th>
+                    <th class="fw-medium">Discount</th>
+                    <th class="fw-medium">Actions</th>
+                  </tr>
+                  <tr
+                    ng-repeat="p in products | filter: searchText | orderBy: productSortOrder + productSortBy | limitTo: 20:begin"
+                  >
+                    <td>
+                      <div>
+                        <img
+                          src="{{p.thumbnail}}"
+                          class="object-fit-cover rounded-2"
+                          maintain-ratio
+                          style="width: 5rem"
+                          alt=""
+                        />
+                      </div>
+                    </td>
+                    <td>{{p.title}}</td>
+                    <td>{{p.price}}<sup>$</sup></td>
+                    <td>{{p.discountPercentage}}<sup>%</sup></td>
+                    <td>
+                      <div class="d-flex gap-2">
+                        <button
+                          class="btn btn-sm btn-primary"
+                          data-bs-toggle="modal"
+                          data-bs-target="#updatingProductModal"
+                          ng-click="openUpdateProduct(p.id)"
+                        >
+                          Update
+                        </button>
+                        <button
+                          class="btn btn-sm btn-danger"
+                          ng-click="deleteProduct(p.id)"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <!-- END TAB-CONTENT -->
+            </div>
+          </div>
+          <!-- END SECOND COL -->
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- END MAIN -->
+</div>
+
+<!-- MODALS -->
+<!-- add user modal -->
+<div class="modal fade" id="addUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Add user</h1>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form name="addUser_form">
+          <div class="field d-flex flex-column">
+            <label for="addUsername">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              ng-model="addUser.username"
+              required
+              id="addUsername"
+            />
+          </div>
+          <div class="field d-flex flex-column">
+            <label for="addEmail">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              ng-model="addUser.email"
+              required
+              id="addEmail"
+            />
+          </div>
+          <div class="field d-flex flex-column">
+            <label for="addPassword">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              ng-model="addUser.password"
+              required
+              id="addPassword"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" ng-click="addUser()" class="btn btn-success">
+          Add user
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- update user modal -->
+<div class="modal fade" id="updateUserModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Update user</h1>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form name="updateUser_form">
+          <div class="field d-flex flex-column">
+            <label for="updateUsername">Username</label>
+            <input
+              type="text"
+              class="form-control"
+              ng-model="updateUser.username"
+              required
+              id="updateUsername"
+            />
+          </div>
+          <div class="field d-flex flex-column">
+            <label for="updateEmail">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              ng-model="updateUser.email"
+              required
+              id="updateEmail"
+            />
+          </div>
+          <div class="field d-flex flex-column">
+            <label for="updatePassword">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              ng-model="updateUser.password"
+              required
+              id="updatePassword"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="button" ng-click="updatingUser()" class="btn btn-success">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- add product modal -->
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-hidden="true">
+  <form
+    class="modal-dialog"
+    name="addProduct_form"
+    ng-submit="addingProduct()"
+    enctype="multipart/form-data"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Add product</h1>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex gap-3">
+          <div class="fields flex-grow-1">
+            <!-- fields start -->
+            <!-- Title -->
+            <input
+              required
+              type="text"
+              class="form-control"
+              ng-model="addProduct.title"
+              placeholder="title"
+            />
+
+            <!-- Price -->
+            <input
+              required
+              type="number"
+              class="form-control mt-2"
+              ng-model="addProduct.price"
+              placeholder="price"
+            />
+            <!-- Discount -->
+            <input
+              required
+              type="number"
+              class="form-control mt-2"
+              ng-model="addProduct.discountPercentage"
+              placeholder="discount %"
+            />
+            <!-- Discount -->
+            <input
+              required
+              type="number"
+              class="form-control mt-2"
+              ng-model="addProduct.rating"
+              placeholder="rating"
+              min="0"
+              max="5"
+            />
+            <!-- Stock -->
+            <input
+              required
+              type="number"
+              class="form-control mt-2"
+              ng-model="addProduct.stock"
+              placeholder="stock"
+            />
+
+            <!-- Category -->
+            <div class="input-group mb-2 mt-2">
+              <span class="input-group-text">Danh mục</span>
+              <select
+                class="form-select"
+                required
+                ng-model="addProduct.category"
+                ng-options="category for category in categoryList"
+              >
+                <option disabled selected>Select category</option>
+              </select>
+            </div>
+
+            <!-- Brand -->
+            <input
+              required
+              type="text"
+              class="form-control"
+              ng-model="addProduct.brand"
+              placeholder="brand"
+            />
+
+            <!-- INPUT UPLOAD PRODUCTIMG -->
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Image</label>
+              <input
+                required
+                id="upload-productImg"
+                class="form-control"
+                type="file"
+                ng-model="uploadedImage"
+                ng-click="console.log('haha')"
+              />
+            </div>
+
+            <!-- MÔ TẢ -->
+            <div class="form-floating">
+              <textarea
+                required
+                class="form-control"
+                placeholder="Enter description"
+                ng-model="addProduct.description"
+                style="height: 100px"
+              ></textarea>
+              <label for="mota" class="text-secondary">Description</label>
+            </div>
+            <!-- fields end -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-success">Add Product</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- update product modal -->
+<div
+  class="modal fade"
+  id="updatingProductModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+  <form
+    class="modal-dialog"
+    name="updatingProduct_form"
+    ng-submit="updateProduct()"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Add product</h1>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex gap-3">
+          <div class="fields flex-grow-1">
+            <!-- fields start -->
+            <!-- Title -->
+            <input
+              required
+              type="text"
+              class="form-control"
+              ng-model="updatingProduct.title"
+              placeholder="title"
+            />
+
+            <!-- Price -->
+            <input
+              required
+              type="text"
+              class="form-control mt-2"
+              ng-model="updatingProduct.price"
+              placeholder="price"
+            />
+            <!-- Discount -->
+            <input
+              required
+              type="text"
+              class="form-control mt-2"
+              ng-model="updatingProduct.discountPercentage"
+              placeholder="discount %"
+            />
+            <!-- Discount -->
+            <input
+              required
+              type="text"
+              class="form-control mt-2"
+              ng-model="updatingProduct.rating"
+              placeholder="rating"
+              min="0"
+              max="5"
+            />
+            <!-- Stock -->
+            <input
+              required
+              type="text"
+              class="form-control mt-2"
+              ng-model="updatingProduct.stock"
+              placeholder="stock"
+            />
+
+            <!-- Category -->
+            <div class="input-group mb-2 mt-2">
+              <span class="input-group-text">Danh mục</span>
+              <select
+                class="form-select"
+                required
+                ng-model="updatingProduct.category"
+                ng-options="category for category in categoryList"
+              >
+                <option disabled selected>Select category</option>
+              </select>
+            </div>
+
+            <!-- Brand -->
+            <input
+              required
+              type="text"
+              class="form-control"
+              ng-model="updatingProduct.brand"
+              placeholder="brand"
+            />
+
+            <!-- MÔ TẢ -->
+            <div class="form-floating">
+              <textarea
+                required
+                class="form-control"
+                placeholder="Enter description"
+                ng-model="updatingProduct.description"
+                style="height: 100px"
+              ></textarea>
+              <label for="mota" class="text-secondary">Description</label>
+            </div>
+            <!-- fields end -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button type="submit" class="btn btn-success">Update</button>
+      </div>
+    </div>
+  </form>
+</div>
