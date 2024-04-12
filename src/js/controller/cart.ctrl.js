@@ -22,14 +22,16 @@ export function CartCtrl(
           const { username } = activeUser;
           let cart = Cart.getUserCart(username);
           //creat and add test data if don't have a cart yet
-          if (!cart)
+          if (!cart) {
             await $http.get("./src/json/testCart.json").then(({ data }) => {
               Cart.update(username, data);
               cart = { username, products: data };
             });
+          }
+          console.log(cart);
+
           $scope.cartItems = cart.products.map((cartP) => {
-            const pInfo = products.find((p) => p.id == cartP.id);
-            return { ...cartP, ...pInfo };
+            return { ...cartP, ...products.find((p) => p.id == cartP.id) };
           });
           $scope.quantityCollection = [];
           $scope.cartItems.forEach(({ quantity }, i) => {

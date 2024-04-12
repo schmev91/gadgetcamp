@@ -34,7 +34,7 @@ export function addItem(username, id, quantity) {
     cartIndex = carts.findIndex((c) => c.username == username);
   const cart = carts[cartIndex];
   if (!cart) {
-    carts.push({ username, products: { id, quantity } });
+    carts.push({ username, products: [{ id, quantity }] });
   } else {
     const isItemExitst = cart.products.some((p, i) => {
       if (p.id == id) {
