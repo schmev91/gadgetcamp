@@ -88,7 +88,9 @@ export function AdminCtrl($scope, $rootScope, app, $loadingOff, $location) {
         pData.images = [base64];
         pData.thumbnail = base64;
         pData.id = $rootScope.products.length;
-        $rootScope.products.push(pData);
+        $rootScope.$apply(function () {
+          $rootScope.products.push(pData);
+        });
       });
     } else console.log("you have to upload the image my little chick");
   };
