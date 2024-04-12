@@ -1,5 +1,5 @@
 ![logo](https://github.com/schmev91/gadgetcamp/blob/master/src/img/gadgetcamp-logo.png)
-# Gadgetcamp - an online e-commerce website
+# [Gadgetcamp](https://schmev91.github.io/gadgetcamp/) - an online e-commerce website
 ### Using:
 - AngularJS
 - Bootstrap
