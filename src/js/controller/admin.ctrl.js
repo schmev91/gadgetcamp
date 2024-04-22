@@ -13,8 +13,8 @@ import {
 export function AdminCtrl($scope, $rootScope, app, $loadingOff, $location) {
   $rootScope.page = "admin";
 
-  if (!$rootScope.activeUser && !$rootScope.activeUser.isAdmin)
-    $location.path("/home");
+  if (!$rootScope.activeUser) $location.path("/home");
+  else if (!$rootScope.activeUser.isAdmin) $location.path("/home");
 
   app
     .init()
@@ -83,15 +83,11 @@ export function AdminCtrl($scope, $rootScope, app, $loadingOff, $location) {
   $scope.addingProduct = function () {
     var file = document.getElementById("upload-productImg").files[0];
     if (file) {
-      const { addProduct: pData } = $scope;
-      fileToBase64(file, function (base64) {
-        pData.images = [base64];
-        pData.thumbnail = base64;
-        pData.id = $rootScope.products.length;
-        $rootScope.$apply(function () {
-          $rootScope.products.push(pData);
-        });
-      });
+      const data = angular.copy($scope.addProduct);
+      const imgURL = URL.createObjectURL(file);
+      data.images = [imgURL];
+      data.thumbnail = imgURL;
+      $rootScope.products.push(addProduct(data));
     } else console.log("you have to upload the image my little chick");
   };
   $scope.deleteProduct = function (index) {

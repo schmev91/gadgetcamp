@@ -110,11 +110,13 @@ export function saveProducts(newProducts) {
 
 export function addProduct(data) {
   let products = getProducts();
-  products.push({
+  const newProduct = {
     id: products.length,
     ...data,
-  });
+  };
+  products.push(newProduct);
   saveProducts(products);
+  return newProduct;
 }
 
 export function fileToBase64(file, callback) {
