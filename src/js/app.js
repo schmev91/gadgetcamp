@@ -42,7 +42,7 @@ angular
             },
             {
               name: "categoryList",
-              url: "https://dummyjson.com/products/categories",
+              url: "https://dummyjson.com/products/category-list",
             },
             {
               name: "banners",
